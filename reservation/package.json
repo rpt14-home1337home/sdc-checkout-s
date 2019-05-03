@@ -1,17 +1,18 @@
 {
-  "name": "",
-  "version": "",
-  "description": "",
-  "author": "",
-  "license": "",
+  "name": "reservation",
+  "version": "1.0.0",
+  "description": "> Project description",
   "engines": {
     "node": ">=6.13.0"
   },
+  "main": ".eslintrc.js",
   "scripts": {
-  },
-  "dependencies": {
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
     "eslint-config-hackreactor": "git://github.com/reactorcore/eslint-config-hackreactor"
-  }
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }
