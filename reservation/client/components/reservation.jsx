@@ -1,27 +1,20 @@
-import React, { Fragment } from 'react';
+import React from 'react';
+import Icon from './Icon.jsx';
+import Property from './Property.jsx';
+import Price from './Price.jsx';
+import Dates from './Dates.jsx';
 
 const Reservation = () => (
-  <div id="footer">
-    <div className="home-plus" id="logo">
-      <svg className="home-plus"></svg>
+  <footer id="footer">
+    <div id="container">
+      <div id="footer-content">
+        <Icon/>
+        <Property/>
+        <Price/>
+        <Dates/>
+      </div>
     </div>
-    <div id="name">
-      <div className="home-name">Entire Loft In Cape Town</div>
-      <button className="reviews">
-        <div>
-          <span className="star-rating"></span>
-          <span className="reviews-count">167</span>
-        </div>
-      </button>
-    </div>
-    <div id="price">
-      <span className="price">$57 </span>
-      <span className="duration">/ night</span>
-    </div>
-    <div id="book">
-      <button className="book">Book</button>
-    </div>
-  </div>
+  </footer>
 );
 
 export default Reservation;
