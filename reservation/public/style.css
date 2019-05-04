@@ -3,23 +3,10 @@ body {
   margin: 0;
 }
 
-.home-plus {
-  background-image: url('https://a0.muscache.com/airbnb/static/icons/android-icon-192x192-c0465f9f0380893768972a31a614b670.png');
-  background-size: 50px;
-  width: 50px;
-  height: 36px;
-  fill: rgb(145, 70, 105);
-  overflow: hidden;
-}
-
+/* FOOTER */
 #footer {
   position: fixed;
   bottom: 0px;
-  width: 100%;
-}
-
-#footer-content {
-  display: table;
   width: 100%;
 }
 
@@ -29,9 +16,28 @@ body {
   box-shadow: 0px 1px 4px 1px rgba(0, 0, 0, 0.14);
 }
 
-#logo {
-  display: table-cell;
+#footer-content {
+  display: table;
+  width: 100%;
 }
+
+/* LOGO */
+
+#logo-plus {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+#logo-plus-spacing {
+  margin-bottom: -6px;
+  margin-right: 28px;
+}
+
+#logo-icon-plus {
+  height: 36px;
+  fill: rgb(145, 70, 105);
+}
+
 
 .star-rating {
   background-image: url('assets/star.png');
