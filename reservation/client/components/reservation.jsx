@@ -1,7 +1,20 @@
 import React from 'react';
+import Icon from './Icon.jsx';
+import Property from './Property.jsx';
+import Price from './Price.jsx';
+import Dates from './Dates.jsx';
 
 const Reservation = () => (
-  <h1>Hello World</h1>
+  <footer id="footer">
+    <div id="container">
+      <div id="footer-content">
+        <Icon/>
+        <Property/>
+        <Price/>
+        <Dates/>
+      </div>
+    </div>
+  </footer>
 );
 
 export default Reservation;
