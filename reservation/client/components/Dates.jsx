@@ -2,8 +2,8 @@ import React from 'react';
 
 const Dates = () => (
   <div id="book-container">
-    <div id="book">
-      <button className="book">Book</button>
+    <div id="book-spacing">
+      <button className="book" type="submit">Book</button>
     </div>
   </div>
 );

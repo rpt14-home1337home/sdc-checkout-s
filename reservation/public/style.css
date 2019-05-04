@@ -97,7 +97,7 @@ body {
 #reviews-count {
   word-wrap: break-word;
   font-size: 11px;
-  font-weight: 800;
+  font-weight: 700;
   line-height: 1.3333333333333333em;
   color: #484848;
 }
@@ -139,22 +139,25 @@ body {
 /* BOOKING */
 #book-container {
   display: table-cell;
-  margin-left: 24px;
+  vertical-align: middle;
 }
 
-#book {
+#book-spacing {
+  margin-left: 24px;
   width: 174px;
   height: 48px;
 }
 
 .book {
-  display: inline-block;
   background: #914669;
   color: #fff;
-  font-size: 16px;
-  border-width: 2px;
+  border-color: transparent;
   border-radius: 4px;
+  border-width: 2px;
+  font-size: 16px;
+  font-weight: 500;
   padding: 10px 8px;
+  line-height: 26px;
   cursor: pointer;
   width: 100%;
 }
