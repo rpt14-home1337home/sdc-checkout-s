@@ -160,6 +160,46 @@ img {
 }
 
 /* MODAL-CLOSE BUTTON */
+#modal-backdrop {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(255, 255, 255, 0.8);
+  z-index: 1000;
+}
+
+#modal-container {
+  display: table;
+  height: 100%;;
+  width: 100%;
+}
+
+#modal-cell {
+  display: table-cell;
+  vertical-align: middle;
+  padding: 64px;
+}
+
+#modal-content {
+  width: 100%;
+  position: relative;
+  margin: auto;
+  background-color: rgb(255, 255, 255);
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 10px 0px;
+  max-width: 376px;
+}
+
+#modal-spacing {
+  background-color: rgb(255, 255, 255);
+  padding: 24px;
+}
+
+#modal-button {
+  margin-bottom: 24px;
+}
+
 #button-close {
   padding: 20px;
   margin: -20px;
