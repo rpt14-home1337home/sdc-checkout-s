@@ -123,15 +123,15 @@ body {
 .price {
   word-wrap: break-word;
   font-size: 15px;
-  font-weight: 800;
+  font-weight: 700;
   line-height: 1.375em;
   color: #484848;
 }
 
 .duration {
   word-wrap: break-word;
-  font-size: 15px;
-  font-weight: 400;
+  font-size: 16px;
+  font-weight: 300;
   line-height: 1.375em;
   color: #484848;
 }
