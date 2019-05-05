@@ -2,19 +2,26 @@ import React from 'react';
 import Icon from './Icon.jsx';
 import Property from './Property.jsx';
 import Price from './Price.jsx';
-import Dates from './Dates.jsx';
+import Booking from './Booking.jsx';
+import Modal from './Modal.jsx';
 
 const Reservation = () => (
-  <footer id="footer">
-    <div id="container">
-      <div id="footer-content">
-        <Icon/>
-        <Property/>
-        <Price/>
-        <Dates/>
-      </div>
+  <div>
+    <Modal />
+    <div id="image-container">
+      <img src="https://a0.muscache.com/4ea/air/v2/pictures/7ea52b34-8177-45ab-b5ad-d1cb83b6f006.jpg?t=r:w2500-h1500-sfit,e:fjpg-c90"/>
     </div>
-  </footer>
+    <footer id="footer">
+      <div id="container">
+        <div id="footer-content">
+          <Icon />
+          <Property />
+          <Price />
+          <Booking />
+        </div>
+      </div>
+    </footer>
+  </div>
 );
 
 export default Reservation;
