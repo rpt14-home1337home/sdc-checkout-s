@@ -1,11 +1,11 @@
 import React from 'react';
+import Ratings from './Ratings.jsx';
 
 class Property extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: 'Entire Loft In Cape Town',
-      reviews: 166
+      name: 'Entire Loft In Cape Town'
     };
   }
 
@@ -22,18 +22,7 @@ class Property extends React.Component {
       <div id="property">
         <div id="property-spacing">
           <div id="property-name">{this.state.name}</div>
-          <button id="reviews">
-            <div>
-              <span id="star-ratings-spacing">
-                <span role="img" id="star-ratings">
-                  <span id="property-star-ratings"></span>
-                </span>
-              </span>
-              <span id="reviews-spacing">
-                <span id="reviews-count">{this.state.reviews}</span>
-              </span>
-            </div>
-          </button>
+          <Ratings />
         </div>
       </div>
     );

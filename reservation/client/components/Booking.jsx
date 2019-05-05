@@ -8,14 +8,14 @@ class Booking extends React.Component {
   }
 
   handleBooking(e) {
-    console.log('Clicked');
+    this.props.handleBooking();
   }
 
   render() {
     return (
       <div id="book-container">
         <div id="book-spacing">
-        <Button name="Book"/>
+        <Button name="Book" handleClick={this.handleBooking}/>
         </div>
       </div>
     );
