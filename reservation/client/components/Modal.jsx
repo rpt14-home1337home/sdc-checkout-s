@@ -78,21 +78,23 @@ class Modal extends React.Component {
                         </div>
                         <div id="guest-spacing">
                           <label id="guests">Guests</label>
-                          <button
-                            id="guests-placeholder"
-                            onClick={this.handleGuest}
-                          >
-                            <div id="guest1">
-                              <div id="guest2">
-                                <div id="guestcell">
-                                  <div className="guest-label">1 guest</div>
+                          <div id="testtest">
+                            <button
+                              id="guests-placeholder"
+                              onClick={this.handleGuest}
+                            >
+                              <div id="guest1">
+                                <div id="guest2">
+                                  <div id="guestcell">
+                                    <div className="guest-label">1 guest</div>
+                                  </div>
+                                  <div id="down-arrow"></div>
                                 </div>
-                                <div id="down-arrow"></div>
                               </div>
+                            </button>
+                            <div id="modal2">
+                              {this.state.showGuestModal && <GuestModal />}
                             </div>
-                          </button>
-                          <div id="modal2">
-                            {this.state.showGuestModal && <GuestModal />}
                           </div>
                         </div>
                       </div>

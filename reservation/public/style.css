@@ -301,3 +301,63 @@ img {
   line-height: 1.3333333333333333em;
   color: #484848;
 }
+
+/* GUEST MODAL */
+#guest-modal-container {
+  position: absolute;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 6px, rgba(0, 0, 0, 0.07) 0px 0px 0px 1px;
+  width: 100%;
+  min-width: 280px;
+  text-align: left;
+  margin-bottom: 16px;
+  box-sizing: border-box;
+  z-index: 2;
+  left: 0px;
+  background: rgb(255, 255, 255);
+  border-radius: 3px;
+  padding: 0px 16px;
+}
+
+.guest-modal-spacing {
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
+
+.guest-modal-table {
+  display: table;
+  width: 100%;
+  border-spacing: 0px;
+}
+
+.guest-modal-cell {
+  display: table-cell;
+  width: 100%;
+  vertical-align: middle;
+}
+
+.guest-modal-label {
+  margin: 0px;
+  word-wrap: break-word;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.375em;
+  color: #484848;
+}
+
+#testtest {
+  width: 100%;
+  position: relative;
+}
+
+#guest-modal-bottom {
+  margin-bottom: 16px;
+}
+
+#guest-modal-info {
+  margin: 0px;
+  word-wrap: break-word;
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.2857142857142858em;
+  color: #484848;
+}
