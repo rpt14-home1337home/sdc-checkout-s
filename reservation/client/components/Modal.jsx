@@ -1,6 +1,7 @@
 import React from 'react';
 import Price from './Price.jsx';
 import Ratings from './Ratings.jsx';
+import GuestModal from './GuestModal.jsx';
 import AirbnbButton from './AirbnbButton.jsx';
 import 'react-dates/initialize';
 import { DateRangePicker } from 'react-dates';
@@ -9,6 +10,7 @@ class Modal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      showGuestModal: false,
       bookButtonName: 'Book',
       startDate: null,
       endDate: null,
@@ -20,7 +22,9 @@ class Modal extends React.Component {
 
   handleGuest(e) {
     e.preventDefault();
-    console.log('clicked');
+    this.setState({
+      showGuestModal: true
+    });
   }
 
   handleClose(e) {
@@ -87,7 +91,9 @@ class Modal extends React.Component {
                               </div>
                             </div>
                           </button>
-                          <div id="modal2"></div>
+                          <div id="modal2">
+                            {this.state.showGuestModal && <GuestModal />}
+                          </div>
                         </div>
                       </div>
                       <div id="book-top-spacing"></div>
