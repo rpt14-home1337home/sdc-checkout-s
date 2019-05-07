@@ -222,69 +222,76 @@ img {
 /* FORM */
 #modal-book-spacing {
   margin-top: 16px;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
 }
 
 #book-dates {
   overflow-wrap: break-word;
   font-size: 12px;
-  font-weight: 600;
+  font-weight: 500;
   line-height: 1.33em;
-  color: rgb(48, 48, 48);
+  color: rgb(72, 72, 72);
+  padding: 4px 0px 4px;
   margin: 0px;
 }
 
-#book-it-table {
-  background-color: rgb(255, 255, 255);
-  display: table;
-  table-layout: fixed;
-  width: 100%;
-  border: 1px solid rgb(235, 235, 235);
-  border-radius: 2px;
+/* GUESTS */
+#guest-spacing {
+  margin-bottom: 16px;
 }
 
-#book-it-row {
-  display: table-row;
-}
-
-#check-in-cell {
-  display: 'table-cell';
-}
-
-#check-in-container {
-  font-weight: normal;
-  font-size: 17px;
-  line-height: 24px;
-  color: rgb(117, 117, 117);
-  position: relative;
-  display: inline-block;
-  width: 100%;
-  vertical-align: middle;
+#guests {
+  overflow-wrap: break-word;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.33em;
+  color: rgb(72, 72, 72);
   margin: 0px;
-  padding: 8px;
+}
+
+#guests-placeholder {
+  text-align: left;
+  line-height: normal;
+  display: block;
+  width: 100%;
   background: rgb(255, 255, 255);
+  border-radius: 2px;
+  padding: 8px;
+  margin-top: 2px;
+  border: 1px solid rgb(235, 235, 235);
 }
 
-#check-in-label {
-  font-size: 16px;
-  opacity: 0;
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  height: 100%;
+#guest1 {
+  margin-left: 8px;
+  margin-right: 8px;
+}
+
+#guest2 {
+  display: table;
   width: 100%;
-  border-width: 0px;
-  background-color: white;
-  cursor: text;
-  padding: 1px;
 }
 
-#check-in-label-2 {
-  white-space: nowrap;
-  padding: 0px 6px;
-  overflow: hidden;
+#guestcell {
+  display: table-cell;
+  width: 100%;
 }
 
+.guest-label {
+  font-size: 16px;
+}
+
+#down-arrow {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 18 18' xmlns='http://www.w3.org/2000/svg' %3E%3Cpath d='m16.29 4.3a1 1 0 1 1 1.41 1.42l-8 8a1 1 0 0 1 -1.41 0l-8-8a1 1 0 1 1 1.41-1.42l7.29 7.29z'/%3E%3C/svg%3E");
+  display: block;
+  width: 16px;
+  height: 16px;
+}
+
+#book-top-spacing {
+  margin-top: 24px;
+}
+
+/* CHARGE */
 #charge {
   margin-top: 8px;
   text-align: center;
@@ -293,8 +300,4 @@ img {
   font-weight: 500;
   line-height: 1.3333333333333333em;
   color: #484848;
-}
-
-#temp-margin-button {
-  margin-top: 20px;
 }

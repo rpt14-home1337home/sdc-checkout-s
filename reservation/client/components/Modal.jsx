@@ -9,11 +9,18 @@ class Modal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      bookButtonName: 'Book',
       startDate: null,
       endDate: null,
       focusedInput: null
     };
     this.handleClose = this.handleClose.bind(this);
+    this.handleGuest = this.handleGuest.bind(this);
+  }
+
+  handleGuest(e) {
+    e.preventDefault();
+    console.log('clicked');
   }
 
   handleClose(e) {
@@ -41,7 +48,7 @@ class Modal extends React.Component {
                     <section>
                       <Price />
                       <Ratings />
-                      <div style={{marginTop: "16px", marginBottom: "16px"}}>
+                      <div style={{marginTop: "19px", marginBottom: "19px"}}>
                         <div id="modal-divider"></div>
                       </div>
                     </section>
@@ -49,31 +56,42 @@ class Modal extends React.Component {
                       <div id="book-fields-placeholder">
                         <div id="modal-book-spacing">
                           <label id="book-dates">Dates</label>
-                          {/* <div id="book-it-table">
-                            <div id="book-it-row">
-
-                            </div>
-                          </div> */}
+                          <DateRangePicker
+                            startDate={this.state.startDate}
+                            startDateId='startDate'
+                            endDate={this.state.endDate}
+                            endDateId='endDate'
+                            onDatesChange={({ startDate, endDate }) => this.setState({ startDate, endDate })}
+                            focusedInput={this.state.focusedInput}
+                            onFocusChange={focusedInput => this.setState({ focusedInput })}
+                            startDatePlaceholderText='Check-in'
+                            endDatePlaceholderText='Checkout'
+                            numberOfMonths={1}
+                            verticalSpacing={12}
+                            block={true}
+                            showClearDates={true}
+                          />
                         </div>
-                        <DateRangePicker
-                          startDate={this.state.startDate}
-                          startDateId='startDate'
-                          endDate={this.state.endDate}
-                          endDateId='endDate'
-                          onDatesChange={({ startDate, endDate }) => this.setState({ startDate, endDate })}
-                          focusedInput={this.state.focusedInput}
-                          onFocusChange={focusedInput => this.setState({ focusedInput })}
-                          startDatePlaceholderText='Check-in'
-                          endDatePlaceholderText='Checkout'
-                          numberOfMonths={1}
-                          verticalSpacing={12}
-                          block={true}
-                          showClearDates={true}
-                        />
+                        <div id="guest-spacing">
+                          <label id="guests">Guests</label>
+                          <button
+                            id="guests-placeholder"
+                            onClick={this.handleGuest}
+                          >
+                            <div id="guest1">
+                              <div id="guest2">
+                                <div id="guestcell">
+                                  <div className="guest-label">1 guest</div>
+                                </div>
+                                <div id="down-arrow"></div>
+                              </div>
+                            </div>
+                          </button>
+                          <div id="modal2"></div>
+                        </div>
                       </div>
-                      <div id="temp-margin-button">
-                        <AirbnbButton name="Book"/>
-                      </div>
+                      <div id="book-top-spacing"></div>
+                      <AirbnbButton name={this.state.bookButtonName}/>
                       <div id="charge">You won't be charged yet</div>
                     </form>
                   </div>
