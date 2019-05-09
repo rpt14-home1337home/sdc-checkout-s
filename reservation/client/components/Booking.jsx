@@ -15,7 +15,10 @@ class Booking extends React.Component {
     return (
       <div id="book-container">
         <div id="book-spacing">
-        <Button name="Book" handleClick={this.handleBooking}/>
+        <Button
+          name="Book"
+          handleClick={this.handleBooking}
+        />
         </div>
       </div>
     );

@@ -361,3 +361,97 @@ img {
   line-height: 1.2857142857142858em;
   color: #484848;
 }
+
+#facebook-modal-container {
+  position: fixed;
+  z-index: 2000;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  overflow-y: auto;
+  background: rgba(0, 0, 0, 0.75)
+}
+
+#facebook-modal-table {
+  display: table;
+  height: 100%;
+  width: 100%;
+}
+
+#facebook-modal-cell {
+  display: table-cell;
+  vertical-align: middle;
+  padding: 64px;
+}
+
+#facebook-container {
+  background-color: rgb(255, 255, 255);
+  max-width: 568px;
+  width: 100%;
+  position: relative;
+  margin: auto;
+}
+
+#facebook-spacing {
+  background-color: rgb(255, 255, 255);
+  padding: 32px;
+}
+
+#facebook-spacing-bottom {
+  margin-bottom: 24px;
+}
+
+#facebook-close {
+  padding: 20px;
+  margin: -20px;
+  cursor: pointer;
+  background-color: transparent;
+  display: block;
+  border-width: 0px;
+}
+
+#facebook-close-arrow {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg' %3E%3Cpath d='m23.25 24c-.19 0-.38-.07-.53-.22l-10.72-10.72-10.72 10.72c-.29.29-.77.29-1.06 0s-.29-.77 0-1.06l10.72-10.72-10.72-10.72c-.29-.29-.29-.77 0-1.06s.77-.29 1.06 0l10.72 10.72 10.72-10.72c.29-.29.77-.29 1.06 0s .29.77 0 1.06l-10.72 10.72 10.72 10.72c.29.29.29.77 0 1.06-.15.15-.34.22-.53.22'/%3E%3C/svg%3E");
+  height: 16px;
+  width: 16px;
+  display: block;
+  fill: rgb(118, 118, 118);
+}
+
+#facebook-login-noti {
+  margin-bottom: 24px;
+  overflow-wrap: break-word;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.25em;
+  color: rgb(72, 72, 72);
+  padding-top: 2px;
+  padding-bottom: 2px;
+  margin: 0px;
+}
+
+#login-spacing-bottom {
+  margin-bottom: 24px;
+}
+
+.facebook-btn {
+  cursor: pointer;
+  position: relative;
+  display: inline-block;
+  text-align: center;
+  width: 100%;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: normal;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-weight: 800;
+  padding-left: 22px;
+  padding-right: 22px;
+  color: rgb(255, 255, 255);
+  text-decoration: none;
+  border-radius: 4px;
+  background: rgb(69, 104, 178);
+  border: 2px solid transparent;
+}

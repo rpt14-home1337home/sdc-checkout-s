@@ -2,7 +2,8 @@ import React from 'react';
 import Price from './Price.jsx';
 import Ratings from './Ratings.jsx';
 import GuestModal from './GuestModal.jsx';
-import AirbnbButton from './AirbnbButton.jsx';
+import Button from './AirbnbButton.jsx';
+import FacebookLogin from './FacebookLogin.jsx'
 import 'react-dates/initialize';
 import { DateRangePicker } from 'react-dates';
 
@@ -10,6 +11,7 @@ class Modal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      showFacebookLogin: false,
       showGuestModal: false,
       bookButtonName: 'Book',
       startDate: null,
@@ -18,6 +20,19 @@ class Modal extends React.Component {
     };
     this.handleClose = this.handleClose.bind(this);
     this.handleGuest = this.handleGuest.bind(this);
+    this.handleBooking = this.handleBooking.bind(this);
+  }
+
+  handleBooking() {
+    if (!this.state.startDate) {
+      document.getElementById('startDate').focus();
+    } else if (!this.state.endDate) {
+      document.getElementById('endDate').focus();
+    } else {
+      this.setState({
+        showFacebookLogin: true
+      });
+    }
   }
 
   handleGuest(e) {
@@ -99,7 +114,11 @@ class Modal extends React.Component {
                         </div>
                       </div>
                       <div id="book-top-spacing"></div>
-                      <AirbnbButton name={this.state.bookButtonName}/>
+                      <Button
+                        name={this.state.bookButtonName}
+                        handleClick={this.handleBooking}
+                      />
+                      {this.state.showFacebookLogin && <FacebookLogin/>}
                       <div id="charge">You won't be charged yet</div>
                     </form>
                   </div>
