@@ -26,6 +26,14 @@ class Calendar extends React.Component {
     );
   }
 
+  currentMonth() {
+    return this.state.now.format('MMM');
+  }
+
+  currentYear() {
+    return this.state.now.format('YYYY');
+  }
+
   render() {
     const blankDays = [];
     for (let i = 0; i < this.firstDayOfMOnth(); i++) {
@@ -50,18 +58,21 @@ class Calendar extends React.Component {
     });
 
     return (
-      <table id='calendar'>
-        <thead>
-          <tr id='weekdays-header'>
-            {this.weekdaysMin()}
-          </tr>
-        </thead>
-        <tbody>
-          {weeks.map((week, index) => (
-            <tr key={index}>{week}</tr>
-          ))}
-        </tbody>
-      </table>
+      <div>
+        <div>{this.currentMonth()} {this.currentYear()}</div>
+        <table id='calendar'>
+          <thead>
+            <tr id='weekdays-header'>
+              {this.weekdaysMin()}
+            </tr>
+          </thead>
+          <tbody>
+            {weeks.map((week, index) => (
+              <tr key={index}>{week}</tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     );
   }
 }
