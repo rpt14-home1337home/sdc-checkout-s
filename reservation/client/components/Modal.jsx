@@ -3,9 +3,8 @@ import Price from './Price.jsx';
 import Ratings from './Ratings.jsx';
 import GuestModal from './GuestModal.jsx';
 import Button from './AirbnbButton.jsx';
+import Calendar from './Calendar.jsx';
 import FacebookLogin from './FacebookLogin.jsx'
-import 'react-dates/initialize';
-import { DateRangePicker } from 'react-dates';
 
 class Modal extends React.Component {
   constructor(props) {
@@ -47,6 +46,21 @@ class Modal extends React.Component {
   }
 
   render() {
+    const styles = theme => ({
+      textField: {
+          width: '90%',
+          marginLeft: 'auto',
+          marginRight: 'auto',
+          paddingBottom: 0,
+          marginTop: 0,
+          fontWeight: 500
+      },
+      input: {
+          color: 'white'
+      }
+  });
+
+
     return (
       <div id="modal-backdrop">
         <div id="modal-container">
@@ -75,21 +89,7 @@ class Modal extends React.Component {
                       <div id="book-fields-placeholder">
                         <div id="modal-book-spacing">
                           <label id="book-dates">Dates</label>
-                          <DateRangePicker
-                            startDate={this.state.startDate}
-                            startDateId='startDate'
-                            endDate={this.state.endDate}
-                            endDateId='endDate'
-                            onDatesChange={({ startDate, endDate }) => this.setState({ startDate, endDate })}
-                            focusedInput={this.state.focusedInput}
-                            onFocusChange={focusedInput => this.setState({ focusedInput })}
-                            startDatePlaceholderText='Check-in'
-                            endDatePlaceholderText='Checkout'
-                            numberOfMonths={1}
-                            verticalSpacing={12}
-                            block={true}
-                            showClearDates={true}
-                          />
+                          <Calendar />
                         </div>
                         <div id="guest-spacing">
                           <label id="guests">Guests</label>

@@ -455,3 +455,27 @@ img {
   background: rgb(69, 104, 178);
   border: 2px solid transparent;
 }
+
+.calendar-day {
+  border: 1px solid rgb(228, 231, 231);
+  color: #484848;
+  font-size: 14px;
+  font-weight: 700;
+  text-align: center;
+  width: 41px;
+  height: 40px;
+}
+
+#calendar {
+  border-collapse: collapse;
+}
+
+.weekdays-short {
+  color: #757575;
+  font-size: 11.67px;
+  font-weight: normal;
+}
+
+#weekdays-header {
+  line-height: 17px;
+}
