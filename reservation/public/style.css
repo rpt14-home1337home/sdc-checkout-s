@@ -479,3 +479,50 @@ img {
 #weekdays-header {
   line-height: 17px;
 }
+
+#calendar-container {
+  padding-top: 22px;
+  padding-bottom: 37px;
+}
+
+#current-period {
+  text-align: center;
+  color: #484848;
+  font-size: 18px;
+}
+
+.previous-month-container {
+  cursor: pointer;
+  color: rgb(117, 117, 117);
+  background-color: #fff;
+  top: 18px;
+  line-height: 0.78;
+  left: 22px;
+  margin: 0px;
+  border: 1px solid rgb(228, 231, 231);
+  border-radius: 3px;
+  padding: 6px 9px;
+}
+
+#previous-month-arrow {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 1000 1000' xmlns='http://www.w3.org/2000/svg' %3E%3Cpath d='M336.2 274.5l-210.1 210h805.4c13 0 23 10 23 23s-10 23-23 23H126.1l210.1 210.1c11 11 11 21 0 32-5 5-10 7-16 7s-11-2-16-7l-249.1-249c-11-11-11-21 0-32l249.1-249.1c21-21.1 53 10.9 32 32z'/%3E%3C/svg%3E");
+  height: 19px;
+  width: 19px;
+  fill: rgb(130, 136, 138);
+}
+
+.calendar-day:hover {
+  cursor: pointer;
+  background-color: rgb(228, 231, 231);
+}
+
+.start-date-select {
+  border: 1px solid rgb(228, 231, 231);
+  background-color: rgb(119, 49, 82);
+  color: rgb(255, 255, 255);
+}
+
+.start-date-select:hover {
+  cursor: pointer;
+  background-color: rgb(119, 49, 82);
+}

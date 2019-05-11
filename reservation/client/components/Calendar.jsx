@@ -1,13 +1,24 @@
 import React from 'react';
 import moment from 'moment';
+import classNames from 'classnames';
 
 class Calendar extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      now: moment()
+      now: moment(),
+      startDate: null
     };
+
+    this.onDaySelect = this.onDaySelect.bind(this);
+  }
+
+  onDaySelect(day) {
+    console.log('clicked')
+    this.setState({
+      startDate: day
+    });
   }
 
   firstDayOfMOnth() {
@@ -34,6 +45,18 @@ class Calendar extends React.Component {
     return this.state.now.format('YYYY');
   }
 
+  handleNext() {
+    this.setState({
+      now: this.state.now.add(1, 'month')
+    });
+  }
+
+  handlePrev() {
+    this.setState({
+      now: this.state.now.subtract(1, 'month')
+    });
+  }
+
   render() {
     const blankDays = [];
     for (let i = 0; i < this.firstDayOfMOnth(); i++) {
@@ -41,8 +64,21 @@ class Calendar extends React.Component {
     }
 
     const daysInMonth = [];
+
     for (let i = 1; i <= this.daysInMonth(); i++) {
-      daysInMonth.push(<td key={i + this.firstDayOfMOnth()} className='calendar-day'>{i}</td>);
+      const dayClass = classNames({
+        'calendar-day': true,
+        'start-date-select': this.state.startDate === i
+      });
+
+      daysInMonth.push(
+        <td
+          key={i + this.firstDayOfMOnth()}
+          onClick={ () => this.onDaySelect(i) }
+          className={dayClass}
+        >
+          {i}
+        </td>);
     }
 
     const totalDays = [...blankDays, ...daysInMonth];
@@ -59,7 +95,12 @@ class Calendar extends React.Component {
 
     return (
       <div>
-        <div>{this.currentMonth()} {this.currentYear()}</div>
+        <div id='calendar-container'>
+          <button type='submit' className='previous-month-container'>
+            <svg id="previous-month-arrow"></svg>
+          </button>
+          <div id='current-period'><strong>{this.currentMonth()} {this.currentYear()}</strong></div>
+        </div>
         <table id='calendar'>
           <thead>
             <tr id='weekdays-header'>
