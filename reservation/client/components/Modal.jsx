@@ -26,7 +26,9 @@ class Modal extends React.Component {
     this.handleGuest = this.handleGuest.bind(this);
     this.handleBooking = this.handleBooking.bind(this);
     this.onStartDate = this.onStartDate.bind(this);
+    this.onStartDateBlur = this.onStartDateBlur.bind(this);
     this.onEndDate = this.onEndDate.bind(this);
+    this.onEndDateBlur = this.onEndDateBlur.bind(this);
     this.onDaySelect = this.onDaySelect.bind(this);
   }
 
@@ -44,7 +46,19 @@ class Modal extends React.Component {
     });
   }
 
+  onStartDateBlur() {
+    this.setState({
+      onStartDateSelect: !this.state.onStartDateSelect,
+    });
+  }
+
   onEndDate() {
+    this.setState({
+      onEndDateSelect: !this.state.onEndDateSelect
+    });
+  }
+
+  onEndDateBlur() {
     this.setState({
       onEndDateSelect: !this.state.onEndDateSelect
     });
@@ -132,6 +146,7 @@ class Modal extends React.Component {
                                     })
                                   }
                                   onClick={this.onStartDate}
+                                  onBlur={this.onStartDateBlur}
                                 />
                                 {this.state.showStartDateModal && <Calendar onDaySelect={this.onDaySelect}/>}
                               </div>
@@ -151,6 +166,7 @@ class Modal extends React.Component {
                                     })
                                   }
                                   onClick={this.onEndDate}
+                                  onBlur={this.onEndDateBlur}
                                 />
                               </div>
                             </div>
