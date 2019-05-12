@@ -32,7 +32,8 @@ class Modal extends React.Component {
 
   onDaySelect(startDateSelected) {
     this.setState({
-      startDate: startDateSelected
+      startDate: startDateSelected,
+      showStartDateModal: false
     })
   }
 
@@ -143,7 +144,7 @@ class Modal extends React.Component {
                                 <input
                                   type="text"
                                   placeholder="Checkout"
-                                  id="checkin-label"
+                                  id="checkin-label2"
                                   className={
                                     classNames({
                                       'checkin-label-select': this.state.onEndDateSelect

@@ -22,6 +22,7 @@ class Calendar extends React.Component {
     });
     const dateSelected = moment([this.state.now.year(), this.state.now.month(), day])
     this.props.onDaySelect(dateSelected.format('L'));
+    document.getElementById("checkin-label2").click();
   }
 
   firstDayOfMOnth() {
