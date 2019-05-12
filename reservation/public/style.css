@@ -483,12 +483,16 @@ img {
 #calendar-container {
   padding-top: 22px;
   padding-bottom: 37px;
+  display: table;
+  width: 100%;
 }
 
 #current-period {
   text-align: center;
   color: #484848;
   font-size: 18px;
+  vertical-align: middle;
+  display: table-cell;
 }
 
 .previous-month-container {
@@ -502,10 +506,31 @@ img {
   border: 1px solid rgb(228, 231, 231);
   border-radius: 3px;
   padding: 6px 9px;
+  float: left;
 }
 
 #previous-month-arrow {
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 1000 1000' xmlns='http://www.w3.org/2000/svg' %3E%3Cpath d='M336.2 274.5l-210.1 210h805.4c13 0 23 10 23 23s-10 23-23 23H126.1l210.1 210.1c11 11 11 21 0 32-5 5-10 7-16 7s-11-2-16-7l-249.1-249c-11-11-11-21 0-32l249.1-249.1c21-21.1 53 10.9 32 32z'/%3E%3C/svg%3E");
+  height: 19px;
+  width: 19px;
+  fill: rgb(130, 136, 138);
+}
+
+.next-month-container {
+  cursor: pointer;
+  color: rgb(117, 117, 117);
+  background-color: #fff;
+  top: 18px;
+  line-height: 0.78;
+  margin: 0px;
+  border: 1px solid rgb(228, 231, 231);
+  border-radius: 3px;
+  padding: 6px 9px;
+  float: right;
+}
+
+#next-month-arrow {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 1000 1000' xmlns='http://www.w3.org/2000/svg' %3E%3Cpath d='M694.4 242.4l249.1 249.1c11 11 11 21 0 32L694.4 772.7c-5 5-10 7-16 7s-11-2-16-7c-11-11-11-21 0-32l210.1-210.1H67.1c-13 0-23-10-23-23s10-23 23-23h805.4L662.4 274.5c-21-21.1 11-53.1 32-32.1z'/%3E%3C/svg%3E");
   height: 19px;
   width: 19px;
   fill: rgb(130, 136, 138);
@@ -525,4 +550,63 @@ img {
 .start-date-select:hover {
   cursor: pointer;
   background-color: rgb(119, 49, 82);
+}
+
+.range-date:hover {
+  border: 1px solid rgb(228, 231, 231);
+  background-color: rgb(145, 70, 105);
+  color: rgb(255, 255, 255);
+}
+
+.calendar-day::selection {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently */
+}
+
+#checkout-container {
+  background-color: rgb(255, 255, 255);
+  display: table;
+  width: 100%;
+  border: 1px solid rgb(235, 235, 235);
+  border-radius: 2px;
+}
+
+#checkin-row {
+  display: table-row;
+}
+
+#checkin-input {
+  display: table-cell;
+}
+
+#checkin-label {
+  font-weight: 300;
+  font-size: 17px;
+  line-height: 24px;
+  color: rgb(117, 117, 117);
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  vertical-align: middle;
+  margin: 0px;
+  padding: 10px;
+  background: rgb(255, 255, 255);
+  border-width: 0px;
+}
+
+.next-step-checkout {
+  display: table-cell;
+  vertical-align: middle;
+  width: 24px;
+}
+
+#next-step-checkout-arrow {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg' %3E%3Cpath d='m0 12.5a.5.5 0 0 0 .5.5h21.79l-6.15 6.15a.5.5 0 1 0 .71.71l7-7v-.01a.5.5 0 0 0 .14-.35.5.5 0 0 0 -.14-.35v-.01l-7-7a .5.5 0 0 0 -.71.71l6.15 6.15h-21.79a.5.5 0 0 0 -.5.5z'/%3E%3C/svg%3E");
+  height: 24px;
+  width: 24px;
+  fill: #484848;
 }

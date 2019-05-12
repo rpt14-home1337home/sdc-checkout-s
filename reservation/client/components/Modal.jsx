@@ -89,7 +89,30 @@ class Modal extends React.Component {
                       <div id="book-fields-placeholder">
                         <div id="modal-book-spacing">
                           <label id="book-dates">Dates</label>
-                          <Calendar />
+                          <div id="checkout-container">
+                            <div id="checkout-row">
+                              <div id="checkin-input">
+                                <input
+                                  type="text"
+                                  placeholder="Check-in"
+                                  id="checkin-label"
+                                />
+                              </div>
+                              <div
+                                className="next-step-checkout"
+                              >
+                                <svg id="next-step-checkout-arrow"></svg>
+                              </div>
+                              <div id="checkin-input">
+                                <input
+                                  type="text"
+                                  placeholder="Checkout"
+                                  id="checkin-label"
+                                />
+                              </div>
+                            </div>
+                          </div>
+                          {/* <Calendar /> */}
                         </div>
                         <div id="guest-spacing">
                           <label id="guests">Guests</label>

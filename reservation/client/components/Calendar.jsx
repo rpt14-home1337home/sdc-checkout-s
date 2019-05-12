@@ -12,17 +12,18 @@ class Calendar extends React.Component {
     };
 
     this.onDaySelect = this.onDaySelect.bind(this);
+    this.handlePrev = this.handlePrev.bind(this);
+    this.handleNext = this.handleNext.bind(this);
   }
 
   onDaySelect(day) {
-    console.log('clicked')
     this.setState({
       startDate: day
     });
   }
 
   firstDayOfMOnth() {
-    return moment(this.state.currentDate).startOf('month').format('d');
+    return moment(this.state.now).startOf('month').format('d');
   }
 
   daysInMonth() {
@@ -45,13 +46,15 @@ class Calendar extends React.Component {
     return this.state.now.format('YYYY');
   }
 
-  handleNext() {
+  handleNext(e) {
+    e.preventDefault();
     this.setState({
       now: this.state.now.add(1, 'month')
     });
   }
 
-  handlePrev() {
+  handlePrev(e) {
+    e.preventDefault();
     this.setState({
       now: this.state.now.subtract(1, 'month')
     });
@@ -68,12 +71,13 @@ class Calendar extends React.Component {
     for (let i = 1; i <= this.daysInMonth(); i++) {
       const dayClass = classNames({
         'calendar-day': true,
-        'start-date-select': this.state.startDate === i
+        'start-date-select': this.state.startDate === i,
+        'range-date': i > this.state.startDate
       });
 
       daysInMonth.push(
         <td
-          key={i + this.firstDayOfMOnth()}
+          key={parseInt(i) + parseInt(this.firstDayOfMOnth())}
           onClick={ () => this.onDaySelect(i) }
           className={dayClass}
         >
@@ -82,24 +86,40 @@ class Calendar extends React.Component {
     }
 
     const totalDays = [...blankDays, ...daysInMonth];
-    const weeks = [];
+    let weeks = [];
     let week = [];
 
     totalDays.forEach((day, index) => {
-      week.push(day);
-      if (index % 7 === 0 || index === totalDays.length - 1) {
+      if (index % 7 === 0) {
         weeks.push(week);
         week = [];
+      }
+
+      week.push(day);
+
+      if (index === totalDays.length - 1) {
+        weeks.push(week);
       }
     });
 
     return (
       <div>
         <div id='calendar-container'>
-          <button type='submit' className='previous-month-container'>
+          <button
+            type='submit'
+            className='previous-month-container'
+            onClick={this.handlePrev}
+          >
             <svg id="previous-month-arrow"></svg>
           </button>
           <div id='current-period'><strong>{this.currentMonth()} {this.currentYear()}</strong></div>
+          <button
+            type='submit'
+            className='next-month-container'
+            onClick={this.handleNext}
+          >
+            <svg id="next-month-arrow"></svg>
+          </button>
         </div>
         <table id='calendar'>
           <thead>
