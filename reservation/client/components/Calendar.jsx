@@ -20,6 +20,8 @@ class Calendar extends React.Component {
     this.setState({
       startDate: day
     });
+    const dateSelected = moment([this.state.now.year(), this.state.now.month(), day])
+    this.props.onDaySelect(dateSelected.format('L'));
   }
 
   firstDayOfMOnth() {
@@ -103,36 +105,38 @@ class Calendar extends React.Component {
     });
 
     return (
-      <div>
-        <div id='calendar-container'>
-          <button
-            type='submit'
-            className='previous-month-container'
-            onClick={this.handlePrev}
-          >
-            <svg id="previous-month-arrow"></svg>
-          </button>
-          <div id='current-period'><strong>{this.currentMonth()} {this.currentYear()}</strong></div>
-          <button
-            type='submit'
-            className='next-month-container'
-            onClick={this.handleNext}
-          >
-            <svg id="next-month-arrow"></svg>
-          </button>
+      <div id="calendar-modal">
+        <div id="calendar-modal-padding">
+          <div id='calendar-container'>
+            <button
+              type='submit'
+              className='previous-month-container'
+              onClick={this.handlePrev}
+            >
+              <svg id="previous-month-arrow"></svg>
+            </button>
+            <div id='current-period'><strong>{this.currentMonth()} {this.currentYear()}</strong></div>
+            <button
+              type='submit'
+              className='next-month-container'
+              onClick={this.handleNext}
+            >
+              <svg id="next-month-arrow"></svg>
+            </button>
+          </div>
+          <table id='calendar'>
+            <thead>
+              <tr id='weekdays-header'>
+                {this.weekdaysMin()}
+              </tr>
+            </thead>
+            <tbody>
+              {weeks.map((week, index) => (
+                <tr key={index}>{week}</tr>
+              ))}
+            </tbody>
+          </table>
         </div>
-        <table id='calendar'>
-          <thead>
-            <tr id='weekdays-header'>
-              {this.weekdaysMin()}
-            </tr>
-          </thead>
-          <tbody>
-            {weeks.map((week, index) => (
-              <tr key={index}>{week}</tr>
-            ))}
-          </tbody>
-        </table>
       </div>
     );
   }

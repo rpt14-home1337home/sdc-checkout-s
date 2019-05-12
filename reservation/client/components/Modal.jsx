@@ -14,22 +14,32 @@ class Modal extends React.Component {
       showFacebookLogin: false,
       showGuestModal: false,
       bookButtonName: 'Book',
-      startDate: null,
+      startDate: '',
       endDate: null,
       focusedInput: null,
       onStartDateSelect: false,
-      onEndDateSelect: false
+      onEndDateSelect: false,
+      showStartDateModal: false,
+      showEndDateModal: false
     };
     this.handleClose = this.handleClose.bind(this);
     this.handleGuest = this.handleGuest.bind(this);
     this.handleBooking = this.handleBooking.bind(this);
     this.onStartDate = this.onStartDate.bind(this);
     this.onEndDate = this.onEndDate.bind(this);
+    this.onDaySelect = this.onDaySelect.bind(this);
+  }
+
+  onDaySelect(startDateSelected) {
+    this.setState({
+      startDate: startDateSelected
+    })
   }
 
   onStartDate() {
     this.setState({
-      onStartDateSelect: !this.state.onStartDateSelect
+      onStartDateSelect: !this.state.onStartDateSelect,
+      showStartDateModal: true
     });
   }
 
@@ -113,6 +123,8 @@ class Modal extends React.Component {
                                   type="text"
                                   placeholder="Check-in"
                                   id="checkin-label"
+                                  value={this.state.startDate}
+                                  onChange={(e) => console.log(e)}
                                   className={
                                     classNames({
                                       'checkin-label-select': this.state.onStartDateSelect
@@ -120,6 +132,7 @@ class Modal extends React.Component {
                                   }
                                   onClick={this.onStartDate}
                                 />
+                                {this.state.showStartDateModal && <Calendar onDaySelect={this.onDaySelect}/>}
                               </div>
                               <div
                                 className="next-step-checkout"
@@ -141,7 +154,6 @@ class Modal extends React.Component {
                               </div>
                             </div>
                           </div>
-                          {/* <Calendar /> */}
                         </div>
                         <div id="guest-spacing">
                           <label id="guests">Guests</label>
