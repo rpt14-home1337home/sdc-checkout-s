@@ -5,6 +5,7 @@ import GuestModal from './GuestModal.jsx';
 import Button from './AirbnbButton.jsx';
 import Calendar from './Calendar.jsx';
 import FacebookLogin from './FacebookLogin.jsx'
+import classNames from 'classnames';
 
 class Modal extends React.Component {
   constructor(props) {
@@ -15,11 +16,27 @@ class Modal extends React.Component {
       bookButtonName: 'Book',
       startDate: null,
       endDate: null,
-      focusedInput: null
+      focusedInput: null,
+      onStartDateSelect: false,
+      onEndDateSelect: false
     };
     this.handleClose = this.handleClose.bind(this);
     this.handleGuest = this.handleGuest.bind(this);
     this.handleBooking = this.handleBooking.bind(this);
+    this.onStartDate = this.onStartDate.bind(this);
+    this.onEndDate = this.onEndDate.bind(this);
+  }
+
+  onStartDate() {
+    this.setState({
+      onStartDateSelect: !this.state.onStartDateSelect
+    });
+  }
+
+  onEndDate() {
+    this.setState({
+      onEndDateSelect: !this.state.onEndDateSelect
+    });
   }
 
   handleBooking() {
@@ -96,6 +113,12 @@ class Modal extends React.Component {
                                   type="text"
                                   placeholder="Check-in"
                                   id="checkin-label"
+                                  className={
+                                    classNames({
+                                      'checkin-label-select': this.state.onStartDateSelect
+                                    })
+                                  }
+                                  onClick={this.onStartDate}
                                 />
                               </div>
                               <div
@@ -108,6 +131,12 @@ class Modal extends React.Component {
                                   type="text"
                                   placeholder="Checkout"
                                   id="checkin-label"
+                                  className={
+                                    classNames({
+                                      'checkin-label-select': this.state.onEndDateSelect
+                                    })
+                                  }
+                                  onClick={this.onEndDate}
                                 />
                               </div>
                             </div>
