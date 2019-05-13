@@ -35,7 +35,7 @@ class Modal extends React.Component {
   onDaySelect(startDateSelected) {
     this.setState({
       startDate: startDateSelected,
-      showStartDateModal: false
+      // showStartDateModal: false
     })
   }
 
@@ -49,6 +49,7 @@ class Modal extends React.Component {
   onStartDateBlur() {
     this.setState({
       onStartDateSelect: !this.state.onStartDateSelect,
+      showStartDateModal: false
     });
   }
 
@@ -148,7 +149,8 @@ class Modal extends React.Component {
                                   onClick={this.onStartDate}
                                   onBlur={this.onStartDateBlur}
                                 />
-                                {this.state.showStartDateModal && <Calendar onDaySelect={this.onDaySelect}/>}
+                                {this.state.showStartDateModal &&
+                                  <Calendar onDaySelect={this.onDaySelect}/>}
                               </div>
                               <div
                                 className="next-step-checkout"

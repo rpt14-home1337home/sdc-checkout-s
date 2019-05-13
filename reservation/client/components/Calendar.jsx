@@ -81,7 +81,7 @@ class Calendar extends React.Component {
       daysInMonth.push(
         <td
           key={parseInt(i) + parseInt(this.firstDayOfMOnth())}
-          onClick={ () => this.onDaySelect(i) }
+          onMouseDown={ () => this.onDaySelect(i) }
           className={dayClass}
         >
           {i}
