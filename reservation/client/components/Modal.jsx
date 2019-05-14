@@ -30,13 +30,26 @@ class Modal extends React.Component {
     this.onEndDate = this.onEndDate.bind(this);
     this.onEndDateBlur = this.onEndDateBlur.bind(this);
     this.onDaySelect = this.onDaySelect.bind(this);
+    this.onGuestModalBlur = this.onGuestModalBlur.bind(this);
+    this.onCheckoutSelect = this.onCheckoutSelect.bind(this);
+  }
+
+  onGuestModalBlur() {
+    this.setState({
+      showGuestModal: false
+    });
   }
 
   onDaySelect(startDateSelected) {
     this.setState({
       startDate: startDateSelected,
-      // showStartDateModal: false
-    })
+      showStartDateModal: false,
+      showEndDateModal: true
+    });
+  }
+
+  onCheckoutSelect() {
+    console.log(this.state.startDate);
   }
 
   onStartDate() {
@@ -55,13 +68,15 @@ class Modal extends React.Component {
 
   onEndDate() {
     this.setState({
-      onEndDateSelect: !this.state.onEndDateSelect
+      onEndDateSelect: !this.state.onEndDateSelect,
+      showEndDateModal: true
     });
   }
 
   onEndDateBlur() {
     this.setState({
-      onEndDateSelect: !this.state.onEndDateSelect
+      onEndDateSelect: !this.state.onEndDateSelect,
+      showEndDateModal: false
     });
   }
 
@@ -91,15 +106,15 @@ class Modal extends React.Component {
   render() {
     const styles = theme => ({
       textField: {
-          width: '90%',
-          marginLeft: 'auto',
-          marginRight: 'auto',
-          paddingBottom: 0,
-          marginTop: 0,
-          fontWeight: 500
+      width: '90%',
+      marginLeft: 'auto',
+      marginRight: 'auto',
+      paddingBottom: 0,
+      marginTop: 0,
+      fontWeight: 500
       },
       input: {
-          color: 'white'
+      color: 'white'
       }
   });
 
@@ -149,8 +164,7 @@ class Modal extends React.Component {
                                   onClick={this.onStartDate}
                                   onBlur={this.onStartDateBlur}
                                 />
-                                {this.state.showStartDateModal &&
-                                  <Calendar onDaySelect={this.onDaySelect}/>}
+                                {this.state.showStartDateModal && <Calendar onDaySelect={this.onDaySelect} startDate={this.state.startDate}/>}
                               </div>
                               <div
                                 className="next-step-checkout"
@@ -170,6 +184,7 @@ class Modal extends React.Component {
                                   onClick={this.onEndDate}
                                   onBlur={this.onEndDateBlur}
                                 />
+                                {this.state.showEndDateModal && <Calendar onDaySelect={this.onCheckoutSelect} startDate={this.state.startDate}/>}
                               </div>
                             </div>
                           </div>
@@ -180,6 +195,7 @@ class Modal extends React.Component {
                             <button
                               id="guests-placeholder"
                               onClick={this.handleGuest}
+                              onBlur={this.onGuestModalBlur}
                             >
                               <div id="guest1">
                                 <div id="guest2">

@@ -8,7 +8,7 @@ class Calendar extends React.Component {
 
     this.state = {
       now: moment(),
-      startDate: null
+      startDate: this.props.startDate
     };
 
     this.onDaySelect = this.onDaySelect.bind(this);
@@ -17,12 +17,16 @@ class Calendar extends React.Component {
   }
 
   onDaySelect(day) {
-    this.setState({
-      startDate: day
-    });
     const dateSelected = moment([this.state.now.year(), this.state.now.month(), day])
     this.props.onDaySelect(dateSelected.format('L'));
+    this.setState({
+      startDate: dateSelected
+    });
     document.getElementById("checkin-label2").click();
+  }
+
+  onCheckoutSelect() {
+    console.log('yes');
   }
 
   firstDayOfMOnth() {
@@ -70,11 +74,13 @@ class Calendar extends React.Component {
     }
 
     const daysInMonth = [];
-
+    console.log(this.state.startDate)
     for (let i = 1; i <= this.daysInMonth(); i++) {
+      const dateSelected = moment([this.state.now.year(), this.state.now.month(), i])
+      dateSelected.format('L');
       const dayClass = classNames({
         'calendar-day': true,
-        'start-date-select': this.state.startDate === i,
+        'start-date-select': this.state.startDate === dateSelected.format('L'),
         'range-date': i > this.state.startDate
       });
 
@@ -85,7 +91,8 @@ class Calendar extends React.Component {
           className={dayClass}
         >
           {i}
-        </td>);
+        </td>
+      );
     }
 
     const totalDays = [...blankDays, ...daysInMonth];
