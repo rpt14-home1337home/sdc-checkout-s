@@ -15,6 +15,7 @@ class Modal extends React.Component {
       showGuestModal: false,
       bookButtonName: 'Book',
       startDate: '',
+      startDay: '',
       endDate: null,
       focusedInput: null,
       onStartDateSelect: false,
@@ -40,9 +41,10 @@ class Modal extends React.Component {
     });
   }
 
-  onDaySelect(startDateSelected) {
+  onDaySelect(startDateSelected, day) {
     this.setState({
       startDate: startDateSelected,
+      startDay: day,
       showStartDateModal: false,
       showEndDateModal: true
     });
@@ -184,7 +186,7 @@ class Modal extends React.Component {
                                   onClick={this.onEndDate}
                                   onBlur={this.onEndDateBlur}
                                 />
-                                {this.state.showEndDateModal && <Calendar onDaySelect={this.onCheckoutSelect} startDate={this.state.startDate}/>}
+                                {this.state.showEndDateModal && <Calendar onDaySelect={this.onCheckoutSelect} startDate={this.state.startDate} startDay={this.state.startDay}/>}
                               </div>
                             </div>
                           </div>

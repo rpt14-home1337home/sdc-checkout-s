@@ -8,17 +8,26 @@ class Calendar extends React.Component {
 
     this.state = {
       now: moment(),
-      startDate: this.props.startDate
+      startDate: this.props.startDate,
+      startDay: this.props.startDay,
+      endDay: null
     };
 
     this.onDaySelect = this.onDaySelect.bind(this);
     this.handlePrev = this.handlePrev.bind(this);
     this.handleNext = this.handleNext.bind(this);
+    this.onDateRangeSelect = this.onDateRangeSelect.bind(this);
+  }
+
+  onDateRangeSelect(day) {
+    this.setState({
+      endDay: day
+    });
   }
 
   onDaySelect(day) {
     const dateSelected = moment([this.state.now.year(), this.state.now.month(), day])
-    this.props.onDaySelect(dateSelected.format('L'));
+    this.props.onDaySelect(dateSelected.format('L'), day);
     this.setState({
       startDate: dateSelected
     });
@@ -74,20 +83,21 @@ class Calendar extends React.Component {
     }
 
     const daysInMonth = [];
-    console.log(this.state.startDate)
     for (let i = 1; i <= this.daysInMonth(); i++) {
       const dateSelected = moment([this.state.now.year(), this.state.now.month(), i])
       dateSelected.format('L');
       const dayClass = classNames({
         'calendar-day': true,
+        'active-day': !this.state.startDate || i < this.state.startDay || i != this.state.endDay,
         'start-date-select': this.state.startDate === dateSelected.format('L'),
-        'range-date': i > this.state.startDate
+        'date-range-span': !!this.state.startDay && !!this.state.endDay && i > this.state.startDay && i <= this.state.endDay
       });
 
       daysInMonth.push(
         <td
           key={parseInt(i) + parseInt(this.firstDayOfMOnth())}
           onMouseDown={ () => this.onDaySelect(i) }
+          onMouseEnter={ () => this.onDateRangeSelect(i) }
           className={dayClass}
         >
           {i}
