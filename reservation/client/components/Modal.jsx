@@ -18,6 +18,7 @@ class Modal extends React.Component {
       startDay: '',
       startDateFormat: '',
       endDate: null,
+      endDateFormat: '',
       focusedInput: null,
       onStartDateSelect: false,
       onEndDateSelect: false,
@@ -47,13 +48,16 @@ class Modal extends React.Component {
       startDate: startDateSelected,
       startDateFormat: startDateSelected.format('L'),
       startDay: day,
-      showStartDateModal: false,
-      showEndDateModal: true
+      showStartDateModal: false
     });
   }
 
-  onCheckoutSelect() {
-    console.log(this.state.startDate);
+  onCheckoutSelect(endDateSelected) {
+    this.setState({
+      showEndDateModal: false,
+      endDate: endDateSelected,
+      endDateFormat: endDateSelected.format('L'),
+    });
   }
 
   onStartDate() {
@@ -166,9 +170,9 @@ class Modal extends React.Component {
                                     })
                                   }
                                   onClick={this.onStartDate}
-                                  // onBlur={this.onStartDateBlur}
+                                  onBlur={this.onStartDateBlur}
                                 />
-                                {this.state.showStartDateModal && <Calendar onDaySelect={this.onDaySelect} startDate={this.state.startDate}/>}
+                                {this.state.showStartDateModal && <Calendar type='checkin' onDaySelect={this.onDaySelect} startDate={this.state.startDate}/>}
                               </div>
                               <div
                                 className="next-step-checkout"
@@ -180,6 +184,8 @@ class Modal extends React.Component {
                                   type="text"
                                   placeholder="Checkout"
                                   id="checkin-label2"
+                                  value={this.state.endDateFormat}
+                                  onChange={(e) => console.log(e)}
                                   className={
                                     classNames({
                                       'checkin-label-select': this.state.onEndDateSelect
@@ -188,7 +194,7 @@ class Modal extends React.Component {
                                   onClick={this.onEndDate}
                                   onBlur={this.onEndDateBlur}
                                 />
-                                {this.state.showEndDateModal && <Calendar onDaySelect={this.onCheckoutSelect} startDate={this.state.startDate} startDay={this.state.startDay}/>}
+                                {this.state.showEndDateModal && <Calendar type='checkout' endDate={this.state.endDate} onDaySelect={this.onCheckoutSelect} startDate={this.state.startDate} startDay={this.state.startDay}/>}
                               </div>
                             </div>
                           </div>

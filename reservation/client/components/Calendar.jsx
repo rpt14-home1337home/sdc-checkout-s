@@ -10,6 +10,8 @@ class Calendar extends React.Component {
       now: moment(),
       startDate: this.props.startDate,
       startDay: this.props.startDay,
+      endDate: '',
+      checkoutDate: this.props.endDate,
       endDay: null
     };
 
@@ -28,15 +30,20 @@ class Calendar extends React.Component {
 
   onDaySelect(day) {
     const dateSelected = moment([this.state.now.year(), this.state.now.month(), day])
-    this.props.onDaySelect(dateSelected, day);
-    this.setState({
-      startDate: dateSelected
-    });
-    document.getElementById("checkin-label2").click();
-  }
 
-  onCheckoutSelect() {
-    console.log('yes');
+    if (this.props.type === 'checkin') {
+      this.props.onDaySelect(dateSelected, day);
+      this.setState({
+        startDate: dateSelected
+      });
+
+      document.getElementById("checkin-label2").click();
+    } else if (dateSelected > this.state.startDate) {
+      this.props.onDaySelect(dateSelected, day);
+      this.setState({
+        endDate: dateSelected,
+      });
+    }
   }
 
   firstDayOfMOnth() {
@@ -96,7 +103,8 @@ class Calendar extends React.Component {
         'calendar-day': true,
         'active-day': !this.state.startDate || dateSelected < this.state.startDate && dateSelected !== this.state.endDate,
         'start-date-select': dateSelectedFormat === startDateFormat,
-        'date-range-span': !!this.state.startDay && !!this.state.endDay && dateSelected > this.state.startDate && dateSelected <= this.state.endDate
+        'date-range-span': !!this.state.startDay && !!this.state.endDay && dateSelected > this.state.startDate && dateSelected <= this.state.endDate,
+        'date-range-span-selected': dateSelected > this.state.startDate && dateSelected <= this.state.checkoutDate,
       });
 
       daysInMonth.push(

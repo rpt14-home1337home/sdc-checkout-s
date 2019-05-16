@@ -558,6 +558,12 @@ img {
   color: rgb(255, 255, 255);
 }
 
+.date-range-span-selected {
+  border: 1px solid rgb(228, 231, 231);
+  background-color: rgb(145, 70, 105);
+  color: rgb(255, 255, 255);
+}
+
 .calendar-day::selection {
   -webkit-touch-callout: none; /* iOS Safari */
     -webkit-user-select: none; /* Safari */
