@@ -628,6 +628,10 @@ img {
   outline: none;
 }
 
+#checkin-label2:focus {
+  outline: none;
+}
+
 .next-step-checkout {
   display: table-cell;
   vertical-align: middle;
