@@ -16,6 +16,7 @@ class Modal extends React.Component {
       bookButtonName: 'Book',
       startDate: '',
       startDay: '',
+      startDateFormat: '',
       endDate: null,
       focusedInput: null,
       onStartDateSelect: false,
@@ -44,6 +45,7 @@ class Modal extends React.Component {
   onDaySelect(startDateSelected, day) {
     this.setState({
       startDate: startDateSelected,
+      startDateFormat: startDateSelected.format('L'),
       startDay: day,
       showStartDateModal: false,
       showEndDateModal: true
@@ -156,7 +158,7 @@ class Modal extends React.Component {
                                   type="text"
                                   placeholder="Check-in"
                                   id="checkin-label"
-                                  value={this.state.startDate}
+                                  value={this.state.startDateFormat}
                                   onChange={(e) => console.log(e)}
                                   className={
                                     classNames({
@@ -164,7 +166,7 @@ class Modal extends React.Component {
                                     })
                                   }
                                   onClick={this.onStartDate}
-                                  onBlur={this.onStartDateBlur}
+                                  // onBlur={this.onStartDateBlur}
                                 />
                                 {this.state.showStartDateModal && <Calendar onDaySelect={this.onDaySelect} startDate={this.state.startDate}/>}
                               </div>

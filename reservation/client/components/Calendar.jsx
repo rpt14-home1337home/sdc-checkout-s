@@ -19,15 +19,16 @@ class Calendar extends React.Component {
     this.onDateRangeSelect = this.onDateRangeSelect.bind(this);
   }
 
-  onDateRangeSelect(day) {
+  onDateRangeSelect(day, date) {
     this.setState({
-      endDay: day
+      endDay: day,
+      endDate: date
     });
   }
 
   onDaySelect(day) {
     const dateSelected = moment([this.state.now.year(), this.state.now.month(), day])
-    this.props.onDaySelect(dateSelected.format('L'), day);
+    this.props.onDaySelect(dateSelected, day);
     this.setState({
       startDate: dateSelected
     });
@@ -83,21 +84,26 @@ class Calendar extends React.Component {
     }
 
     const daysInMonth = [];
+    let dateSelectedFormat = '';
+    let startDateFormat = null;
     for (let i = 1; i <= this.daysInMonth(); i++) {
       const dateSelected = moment([this.state.now.year(), this.state.now.month(), i])
-      dateSelected.format('L');
+      if (this.state.startDate) {
+        dateSelectedFormat = dateSelected.format('L');
+        startDateFormat = this.state.startDate.format('L');
+      }
       const dayClass = classNames({
         'calendar-day': true,
-        'active-day': !this.state.startDate || i < this.state.startDay || i != this.state.endDay,
-        'start-date-select': this.state.startDate === dateSelected.format('L'),
-        'date-range-span': !!this.state.startDay && !!this.state.endDay && i > this.state.startDay && i <= this.state.endDay
+        'active-day': !this.state.startDate || dateSelected < this.state.startDate && dateSelected !== this.state.endDate,
+        'start-date-select': dateSelectedFormat === startDateFormat,
+        'date-range-span': !!this.state.startDay && !!this.state.endDay && dateSelected > this.state.startDate && dateSelected <= this.state.endDate
       });
 
       daysInMonth.push(
         <td
           key={parseInt(i) + parseInt(this.firstDayOfMOnth())}
           onMouseDown={ () => this.onDaySelect(i) }
-          onMouseEnter={ () => this.onDateRangeSelect(i) }
+          onMouseEnter={ () => this.onDateRangeSelect(i, dateSelected) }
           className={dayClass}
         >
           {i}
