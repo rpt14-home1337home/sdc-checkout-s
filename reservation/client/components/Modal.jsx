@@ -94,9 +94,19 @@ class Modal extends React.Component {
     } else if (!this.state.endDate) {
       document.getElementById('endDate').focus();
     } else {
-      this.setState({
-        showFacebookLogin: true
+      fetch('http://localhost:3002/', {
+        method: 'POST',
+        body: JSON.stringify({
+          startDate: this.state.startDate,
+          endDate: this.state.endDate
+        }),
+        headers: {
+          'Content-type': 'application/json'
+        }
       });
+      // this.setState({
+      //   showFacebookLogin: true
+      // });
     }
   }
 
