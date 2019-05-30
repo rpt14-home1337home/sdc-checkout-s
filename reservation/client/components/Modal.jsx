@@ -23,7 +23,8 @@ class Modal extends React.Component {
       onStartDateSelect: false,
       onEndDateSelect: false,
       showStartDateModal: false,
-      showEndDateModal: false
+      showEndDateModal: false,
+      unavailable: {}
     };
     this.handleClose = this.handleClose.bind(this);
     this.handleGuest = this.handleGuest.bind(this);

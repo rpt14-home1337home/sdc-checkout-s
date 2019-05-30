@@ -19,6 +19,10 @@ class Reservation extends React.Component {
     this.setState({
       showModal: true
     });
+
+    fetch('http://localhost:3002/checkout')
+    .then(res => res.json())
+    .then(json => console.log(json));
   }
 
   handleClose() {

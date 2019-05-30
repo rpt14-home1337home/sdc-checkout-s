@@ -1,6 +1,11 @@
 const db = require('./index.js');
 
-// db.queryAsync();
+const getRecords = (cb) => {
+  db.query('SELECT * FROM checkout', function (err, results) {
+    if (err) throw err;
+    cb(results);
+  });
+};
 
 const insertRecord = (checkout, cb) => {
   db.queryAsync(`INSERT INTO checkout SET ?`, checkout, (err, results) => {
@@ -12,3 +17,4 @@ const insertRecord = (checkout, cb) => {
 };
 
 module.exports.insertRecord = insertRecord;
+module.exports.getRecords = getRecords;

@@ -23,6 +23,13 @@ app.use(bodyParser.json());
 // Serve public folder
 app.use(express.static(path.join(__dirname, '../public')));
 
+// Checkout dates
+app.get('/checkout', (req, res) => {
+  database.getRecords((results) => {
+    res.send(results);
+  });
+});
+
 // Checkout user
 app.post('/', (req, res) => {
   database.insertRecord(req.body, () => {
