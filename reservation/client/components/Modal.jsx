@@ -97,8 +97,8 @@ class Modal extends React.Component {
       fetch('http://localhost:3002/', {
         method: 'POST',
         body: JSON.stringify({
-          startDate: this.state.startDate,
-          endDate: this.state.endDate
+          checkin: this.state.startDate,
+          checkout: this.state.endDate
         }),
         headers: {
           'Content-type': 'application/json'

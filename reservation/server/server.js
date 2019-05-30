@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 const path = require('path');
 const fs = require('fs');
 const db = require('./db')
+const database = require('./db/checkout.js');
 const app = express();
 const port = process.env.PORT || 3002;
 
@@ -24,8 +25,9 @@ app.use(express.static(path.join(__dirname, '../public')));
 
 // Checkout user
 app.post('/', (req, res) => {
-  console.log(req.body)
-  res.send('test')
+  database.insertRecord(req.body, () => {
+    res.end();
+  });
 });
 
 // Listen for requests
