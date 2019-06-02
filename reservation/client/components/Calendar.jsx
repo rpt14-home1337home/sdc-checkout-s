@@ -12,13 +12,24 @@ class Calendar extends React.Component {
       startDay: this.props.startDay,
       endDate: '',
       checkoutDate: this.props.endDate,
-      endDay: null
+      endDay: null,
+      blockedDates: []
     };
 
     this.onDaySelect = this.onDaySelect.bind(this);
     this.handlePrev = this.handlePrev.bind(this);
     this.handleNext = this.handleNext.bind(this);
     this.onDateRangeSelect = this.onDateRangeSelect.bind(this);
+  }
+
+  componentDidMount() {
+    fetch('http://localhost:3002/checkout')
+    .then(res => res.json())
+    .then((json) => {
+      this.setState({
+        blockedDates: json
+      });
+    });
   }
 
   onDateRangeSelect(day, date) {
@@ -28,17 +39,17 @@ class Calendar extends React.Component {
     });
   }
 
-  onDaySelect(day) {
+  onDaySelect(day, isBlocked, isOutsideRange) {
     const dateSelected = moment([this.state.now.year(), this.state.now.month(), day])
 
-    if (this.props.type === 'checkin') {
+    if (!isBlocked && this.props.type === 'checkin') {
       this.props.onDaySelect(dateSelected, day);
       this.setState({
         startDate: dateSelected
       });
 
       document.getElementById("checkin-label2").click();
-    } else if (dateSelected > this.state.startDate) {
+    } else if (!isBlocked && !isOutsideRange && dateSelected >= this.state.startDate) {
       this.props.onDaySelect(dateSelected, day);
       this.setState({
         endDate: dateSelected,
@@ -99,18 +110,32 @@ class Calendar extends React.Component {
         dateSelectedFormat = dateSelected.format('L');
         startDateFormat = this.state.startDate.format('L');
       }
+
+      let isBlocked = false;
+      let isOutsideRange = false;
+      for (let i = 0; i < this.state.blockedDates.length; i++) {
+        if (dateSelected >= moment(this.state.blockedDates[i]['checkin']) && dateSelected <= moment(this.state.blockedDates[i]['checkout'])) {
+          isBlocked = true;
+        }
+
+        if (dateSelected >= moment(this.state.blockedDates[i]['checkin']) && moment(this.state.blockedDates[i]['checkout']) >= this.state.startDate) {
+          isOutsideRange = true;
+        }
+      }
+
       const dayClass = classNames({
         'calendar-day': true,
-        'active-day': !this.state.startDate || dateSelected < this.state.startDate && dateSelected !== this.state.endDate,
-        'start-date-select': dateSelectedFormat === startDateFormat,
-        'date-range-span': !!this.state.startDay && !!this.state.endDay && dateSelected > this.state.startDate && dateSelected <= this.state.endDate,
-        'date-range-span-selected': dateSelected > this.state.startDate && dateSelected <= this.state.checkoutDate,
+        'blocked-day': isBlocked,
+        'active-day': !isBlocked && !this.state.startDate || dateSelected < this.state.startDate && dateSelected !== this.state.endDate,
+        'start-date-select': !isBlocked && dateSelectedFormat === startDateFormat,
+        'date-range-span': !isBlocked && !isOutsideRange && !!this.state.startDay && !!this.state.endDay && dateSelected > this.state.startDate && dateSelected <= this.state.endDate,
+        'date-range-span-selected': !isBlocked && !isOutsideRange && dateSelected > this.state.startDate && dateSelected <= this.state.checkoutDate,
       });
 
       daysInMonth.push(
         <td
           key={parseInt(i) + parseInt(this.firstDayOfMOnth())}
-          onMouseDown={ () => this.onDaySelect(i) }
+          onMouseDown={ () => this.onDaySelect(i, isBlocked, isOutsideRange) }
           onMouseEnter={ () => this.onDateRangeSelect(i, dateSelected) }
           className={dayClass}
         >
@@ -143,7 +168,7 @@ class Calendar extends React.Component {
             <button
               type='submit'
               className='previous-month-container'
-              onClick={this.handlePrev}
+              onMouseDown={this.handlePrev}
             >
               <svg id="previous-month-arrow"></svg>
             </button>
@@ -151,7 +176,7 @@ class Calendar extends React.Component {
             <button
               type='submit'
               className='next-month-container'
-              onClick={this.handleNext}
+              onMouseDown={this.handleNext}
             >
               <svg id="next-month-arrow"></svg>
             </button>

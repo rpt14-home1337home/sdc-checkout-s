@@ -466,6 +466,20 @@ img {
   height: 40px;
 }
 
+.blocked-day {
+  border: 1px solid rgb(228, 231, 231);
+  color: rgb(216, 216, 216);
+  font-size: 14px;
+  font-weight: 700;
+  text-align: center;
+  width: 41px;
+  height: 40px;
+}
+
+.blocked-day:hover {
+  cursor: default;
+}
+
 #calendar {
   border-collapse: collapse;
 }
@@ -514,6 +528,18 @@ img {
   height: 19px;
   width: 19px;
   fill: rgb(130, 136, 138);
+}
+
+#checkout-arrow {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 1000 1000' xmlns='http://www.w3.org/2000/svg' %3E%3Cpath d='M0,10 10,0 20,10");
+  position: absolute;
+  width: 20px;
+  height: 10px;
+  left: 22px;
+  z-index: 2;
+  top: 40px;
+  stroke: rgb(235, 235, 235) !important;
+  fill: transparent !important;
 }
 
 .next-month-container {
@@ -659,3 +685,4 @@ img {
 #calendar-modal-padding {
   padding: 0px 20px;
 }
+

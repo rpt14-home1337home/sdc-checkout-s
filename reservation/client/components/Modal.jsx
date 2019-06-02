@@ -68,7 +68,7 @@ class Modal extends React.Component {
     });
   }
 
-  onStartDateBlur() {
+  onStartDateBlur(e) {
     this.setState({
       onStartDateSelect: !this.state.onStartDateSelect,
       showStartDateModal: false
@@ -173,6 +173,7 @@ class Modal extends React.Component {
                                   type="text"
                                   placeholder="Check-in"
                                   id="checkin-label"
+                                  autoComplete="off"
                                   value={this.state.startDateFormat}
                                   onChange={(e) => console.log(e)}
                                   className={
@@ -194,6 +195,7 @@ class Modal extends React.Component {
                                 <input
                                   type="text"
                                   placeholder="Checkout"
+                                  autoComplete="off"
                                   id="checkin-label2"
                                   value={this.state.endDateFormat}
                                   onChange={(e) => console.log(e)}
@@ -206,6 +208,7 @@ class Modal extends React.Component {
                                   onBlur={this.onEndDateBlur}
                                 />
                                 {this.state.showEndDateModal && <Calendar type='checkout' endDate={this.state.endDate} onDaySelect={this.onCheckoutSelect} startDate={this.state.startDate} startDay={this.state.startDay}/>}
+                              <svg id="checkout-arrow"></svg>
                               </div>
                             </div>
                           </div>
