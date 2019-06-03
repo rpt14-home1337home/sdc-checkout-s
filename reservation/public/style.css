@@ -530,18 +530,6 @@ img {
   fill: rgb(130, 136, 138);
 }
 
-#checkout-arrow {
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 1000 1000' xmlns='http://www.w3.org/2000/svg' %3E%3Cpath d='M0,10 10,0 20,10");
-  position: absolute;
-  width: 20px;
-  height: 10px;
-  left: 22px;
-  z-index: 2;
-  top: 40px;
-  stroke: rgb(235, 235, 235) !important;
-  fill: transparent !important;
-}
-
 .next-month-container {
   cursor: pointer;
   color: rgb(117, 117, 117);
@@ -639,7 +627,8 @@ img {
   padding: 8px;
   background: rgb(255, 255, 255);
   border: 0px;
-  color: rgb(72, 72, 72);
+  color: transparent;
+  text-shadow: 0 0 0 rgb(72, 72, 72);
 }
 
 .checkin-label-select::placeholder {
@@ -672,6 +661,7 @@ img {
 }
 
 #calendar-modal {
+  outline:none;
   z-index: 1;
   background-color: rgb(255, 255, 255);
   position: absolute;

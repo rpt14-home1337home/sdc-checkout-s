@@ -20,9 +20,11 @@ class Calendar extends React.Component {
     this.handlePrev = this.handlePrev.bind(this);
     this.handleNext = this.handleNext.bind(this);
     this.onDateRangeSelect = this.onDateRangeSelect.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
   componentDidMount() {
+    document.addEventListener('mousedown', this.handleClick, false);
     fetch('http://localhost:3002/checkout')
     .then(res => res.json())
     .then((json) => {
@@ -30,6 +32,17 @@ class Calendar extends React.Component {
         blockedDates: json
       });
     });
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('mousedown', this.handleClick, false);
+  }
+
+  handleClick(e) {
+    if (this.node.contains(e.target)) {
+      return;
+    }
+    this.props.onBlur();
   }
 
   onDateRangeSelect(day, date) {
@@ -47,8 +60,6 @@ class Calendar extends React.Component {
       this.setState({
         startDate: dateSelected
       });
-
-      document.getElementById("checkin-label2").click();
     } else if (!isBlocked && !isOutsideRange && dateSelected >= this.state.startDate) {
       this.props.onDaySelect(dateSelected, day);
       this.setState({
@@ -162,21 +173,19 @@ class Calendar extends React.Component {
     });
 
     return (
-      <div id="calendar-modal">
+      <div id="calendar-modal" ref={node => { this.node = node; }}>
         <div id="calendar-modal-padding">
           <div id='calendar-container'>
             <button
-              type='submit'
               className='previous-month-container'
-              onMouseDown={this.handlePrev}
+              onClick={this.handlePrev}
             >
               <svg id="previous-month-arrow"></svg>
             </button>
             <div id='current-period'><strong>{this.currentMonth()} {this.currentYear()}</strong></div>
             <button
-              type='submit'
               className='next-month-container'
-              onMouseDown={this.handleNext}
+              onClick={this.handleNext}
             >
               <svg id="next-month-arrow"></svg>
             </button>
