@@ -10,7 +10,6 @@ class Calendar extends React.Component {
       now: moment(),
       today: moment(),
       startDate: this.props.startDate,
-      startDay: this.props.startDay,
       endDate: '',
       checkoutDate: this.props.endDate,
       endDay: null,
@@ -57,12 +56,12 @@ class Calendar extends React.Component {
     const dateSelected = moment([this.state.now.year(), this.state.now.month(), day])
 
     if (!isBlocked && this.props.type === 'check-in') {
-      this.props.onDaySelect(dateSelected, day);
+      this.props.onDaySelect(dateSelected);
       this.setState({
         startDate: dateSelected
       });
     } else if (!isBlocked && !isOutsideRange && dateSelected >= this.state.startDate) {
-      this.props.onDaySelect(dateSelected, day);
+      this.props.onDaySelect(dateSelected);
       this.setState({
         endDate: dateSelected,
       });

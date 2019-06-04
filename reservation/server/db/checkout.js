@@ -13,6 +13,7 @@ const insertRecord = (checkout, cb) => {
       console.log(err);
     }
     console.log(`Inserted record ${JSON.stringify(checkout)}`);
+    cb();
   });
 };
 
