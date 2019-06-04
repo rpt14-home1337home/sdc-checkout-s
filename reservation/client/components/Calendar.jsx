@@ -12,7 +12,6 @@ class Calendar extends React.Component {
       startDate: this.props.startDate,
       endDate: '',
       checkoutDate: this.props.endDate,
-      endDay: null,
       blockedDates: []
     };
 
@@ -47,7 +46,6 @@ class Calendar extends React.Component {
 
   onDateRangeSelect(day, date) {
     this.setState({
-      endDay: day,
       endDate: date
     });
   }

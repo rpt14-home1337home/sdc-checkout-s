@@ -20,10 +20,10 @@ class Modal extends React.Component {
     this.handleClose = this.handleClose.bind(this);
     this.handleGuest = this.handleGuest.bind(this);
     this.handleBooking = this.handleBooking.bind(this);
-    this.onStartDate = this.onStartDate.bind(this);
-    this.onEndDate = this.onEndDate.bind(this);
-    this.onCheckinSelect = this.onCheckinSelect.bind(this);
-    this.onCheckoutSelect = this.onCheckoutSelect.bind(this);
+    this.onStartDateInputSelect = this.onStartDateInputSelect.bind(this);
+    this.onEndDateInputSelect = this.onEndDateInputSelect.bind(this);
+    this.onCheckInDaySelect = this.onCheckInDaySelect.bind(this);
+    this.onCheckOutDaySelect = this.onCheckOutDaySelect.bind(this);
     this.onCalendarBlur = this.onCalendarBlur.bind(this);
     this.onGuestModalBlur = this.onGuestModalBlur.bind(this);
   }
@@ -34,28 +34,28 @@ class Modal extends React.Component {
     });
   }
 
-  onCheckinSelect(startDateSelected) {
+  onCheckInDaySelect(startDateSelected) {
     this.setState({
       startDate: startDateSelected,
       inputActive: 'check-out'
     });
   }
 
-  onCheckoutSelect(endDateSelected) {
+  onCheckOutDaySelect(endDateSelected) {
     this.setState({
       showCalendarModal: false,
       endDate: endDateSelected
     });
   }
 
-  onStartDate() {
+  onStartDateInputSelect() {
     this.setState({
       showCalendarModal: true,
       inputActive: 'check-in'
     }, () => setTimeout(() => document.getElementById("calendar-modal").focus(), 0));
   }
 
-  onEndDate() {
+  onEndDateInputSelect() {
     this.setState({
       showCalendarModal: true,
       inputActive: 'check-out'
@@ -146,7 +146,7 @@ class Modal extends React.Component {
                                       'checkin-label-select': this.state.inputActive === 'check-in'
                                     })
                                   }
-                                  onClick={this.onStartDate}
+                                  onClick={this.onStartDateInputSelect}
                                 />
                               </div>
                               <div
@@ -167,9 +167,9 @@ class Modal extends React.Component {
                                       'checkin-label-select': this.state.inputActive === 'check-out'
                                     })
                                   }
-                                  onClick={this.onEndDate}
+                                  onClick={this.onEndDateInputSelect}
                                 />
-                                {this.state.showCalendarModal && <Calendar type={this.state.inputActive} endDate={this.state.endDate} onDaySelect={this.state.inputActive === 'check-in' ? this.onCheckinSelect : this.onCheckoutSelect} startDate={this.state.startDate} onBlur={this.onCalendarBlur}/>}
+                                {this.state.showCalendarModal && <Calendar type={this.state.inputActive} endDate={this.state.endDate} onDaySelect={this.state.inputActive === 'check-in' ? this.onCheckInDaySelect : this.onCheckOutDaySelect} startDate={this.state.startDate} onBlur={this.onCalendarBlur}/>}
                               </div>
                             </div>
                           </div>
