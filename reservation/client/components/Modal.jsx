@@ -20,17 +20,15 @@ class Modal extends React.Component {
       endDate: null,
       endDateFormat: '',
       focusedInput: null,
-      isStartDateSelected: false,
-      isEndDateSelected: false,
       showStartDateModal: false,
       showEndDateModal: false,
-      unavailable: {}
+      unavailable: {},
+      inputActive: ''
     };
     this.handleClose = this.handleClose.bind(this);
     this.handleGuest = this.handleGuest.bind(this);
     this.handleBooking = this.handleBooking.bind(this);
     this.onStartDate = this.onStartDate.bind(this);
-    this.onStartDateBlur = this.onStartDateBlur.bind(this);
     this.onEndDate = this.onEndDate.bind(this);
     this.onEndDateBlur = this.onEndDateBlur.bind(this);
     this.onDaySelect = this.onDaySelect.bind(this);
@@ -49,9 +47,8 @@ class Modal extends React.Component {
       startDate: startDateSelected,
       startDateFormat: startDateSelected.format('L'),
       startDay: day,
-      showStartDateModal: false,
-      isEndDateSelected: true,
-      showEndDateModal: true
+      showEndDateModal: true,
+      inputActive: 'check-out'
     });
   }
 
@@ -65,28 +62,21 @@ class Modal extends React.Component {
 
   onStartDate() {
     this.setState({
-      isStartDateSelected: true,
-      showStartDateModal: true
+      showEndDateModal: true,
+      inputActive: 'check-in'
     }, () => setTimeout(() => document.getElementById("calendar-modal").focus(), 0));
-  }
-
-  onStartDateBlur(e) {
-    this.setState({
-      isStartDateSelected: false,
-      showStartDateModal: false
-    });
   }
 
   onEndDate() {
     this.setState({
-      isEndDateSelected: true,
-      showEndDateModal: true
+      showEndDateModal: true,
+      inputActive: 'check-out'
     });
   }
 
   onEndDateBlur() {
     this.setState({
-      isEndDateSelected: false,
+      inputActive: '',
       showEndDateModal: false
     });
   }
@@ -107,9 +97,6 @@ class Modal extends React.Component {
           'Content-type': 'application/json'
         }
       });
-      // this.setState({
-      //   showFacebookLogin: true
-      // });
     }
   }
 
@@ -125,21 +112,6 @@ class Modal extends React.Component {
   }
 
   render() {
-    const styles = theme => ({
-      textField: {
-      width: '90%',
-      marginLeft: 'auto',
-      marginRight: 'auto',
-      paddingBottom: 0,
-      marginTop: 0,
-      fontWeight: 500
-      },
-      input: {
-      color: 'white'
-      }
-  });
-
-
     return (
       <div id="modal-backdrop">
         <div id="modal-container">
@@ -180,12 +152,11 @@ class Modal extends React.Component {
                                   onChange={(e) => console.log(e)}
                                   className={
                                     classNames({
-                                      'checkin-label-select': this.state.isStartDateSelected
+                                      'checkin-label-select': this.state.inputActive === 'check-in'
                                     })
                                   }
                                   onClick={this.onStartDate}
                                 />
-                                {this.state.showStartDateModal && <Calendar type='checkin' endDate={this.state.endDate} onDaySelect={this.onDaySelect} startDate={this.state.startDate} onBlur={this.onStartDateBlur}/>}
                               </div>
                               <div
                                 className="next-step-checkout"
@@ -202,20 +173,19 @@ class Modal extends React.Component {
                                   onChange={(e) => console.log(e)}
                                   className={
                                     classNames({
-                                      'checkin-label-select': this.state.isEndDateSelected
+                                      'checkin-label-select': this.state.inputActive === 'check-out'
                                     })
                                   }
                                   onClick={this.onEndDate}
-                                  onBlur={this.onEndDateBlur}
                                 />
-                                {this.state.showEndDateModal && <Calendar type='checkout' endDate={this.state.endDate} onDaySelect={this.onCheckoutSelect} startDate={this.state.startDate} startDay={this.state.startDay} onBlur={this.onEndDateBlur}/>}
+                                {this.state.showEndDateModal && <Calendar type={this.state.inputActive} endDate={this.state.endDate} onDaySelect={this.state.inputActive === 'check-in' ? this.onDaySelect : this.onCheckoutSelect} startDate={this.state.startDate} startDay={this.state.startDay} onBlur={this.onEndDateBlur}/>}
                               </div>
                             </div>
                           </div>
                         </div>
                         <div id="guest-spacing">
                           <label id="guests">Guests</label>
-                          <div id="testtest">
+                          <div>
                             <button
                               id="guests-placeholder"
                               onClick={this.handleGuest}

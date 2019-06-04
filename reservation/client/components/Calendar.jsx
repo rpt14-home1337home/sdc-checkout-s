@@ -8,6 +8,7 @@ class Calendar extends React.Component {
 
     this.state = {
       now: moment(),
+      today: moment(),
       startDate: this.props.startDate,
       startDay: this.props.startDay,
       endDate: '',
@@ -55,7 +56,7 @@ class Calendar extends React.Component {
   onDaySelect(day, isBlocked, isOutsideRange) {
     const dateSelected = moment([this.state.now.year(), this.state.now.month(), day])
 
-    if (!isBlocked && this.props.type === 'checkin') {
+    if (!isBlocked && this.props.type === 'check-in') {
       this.props.onDaySelect(dateSelected, day);
       this.setState({
         startDate: dateSelected
@@ -113,17 +114,11 @@ class Calendar extends React.Component {
     }
 
     const daysInMonth = [];
-    let dateSelectedFormat = '';
-    let startDateFormat = null;
     for (let i = 1; i <= this.daysInMonth(); i++) {
       const dateSelected = moment([this.state.now.year(), this.state.now.month(), i])
-      if (this.state.startDate) {
-        dateSelectedFormat = dateSelected.format('L');
-        startDateFormat = this.state.startDate.format('L');
-      }
-
       let isBlocked = false;
       let isOutsideRange = false;
+
       for (let i = 0; i < this.state.blockedDates.length; i++) {
         if (dateSelected >= moment(this.state.blockedDates[i]['checkin']) && dateSelected <= moment(this.state.blockedDates[i]['checkout'])) {
           isBlocked = true;
@@ -134,12 +129,16 @@ class Calendar extends React.Component {
         }
       }
 
+      if (dateSelected < this.state.today) {
+        isBlocked = true;
+      }
+
       const dayClass = classNames({
         'calendar-day': true,
         'blocked-day': isBlocked,
         'active-day': !isBlocked && !this.state.startDate || dateSelected < this.state.startDate && dateSelected !== this.state.endDate,
-        'start-date-select': !isBlocked && dateSelectedFormat === startDateFormat,
-        'date-range-span': !isBlocked && !isOutsideRange && !!this.state.startDay && !!this.state.endDay && dateSelected > this.state.startDate && dateSelected <= this.state.endDate,
+        'start-date-select': !isBlocked && dateSelected.isSame(this.state.startDate),
+        'date-range-span': !isBlocked && !isOutsideRange && dateSelected > this.state.startDate && dateSelected <= this.state.endDate,
         'date-range-span-selected': !isBlocked && !isOutsideRange && dateSelected > this.state.startDate && dateSelected <= this.state.checkoutDate,
       });
 
