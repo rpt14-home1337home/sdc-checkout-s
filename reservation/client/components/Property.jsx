@@ -1,15 +1,32 @@
 import React from 'react';
+import Ratings from './Ratings.jsx';
 
-const Property = () => (
-  <div id="name">
-    <div className="home-name">Entire Loft In Cape Town</div>
-    <button className="reviews">
-      <div>
-        <span className="star-rating"></span>
-        <span className="reviews-count">167</span>
+class Property extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      name: 'Entire Loft In Cape Town'
+    };
+  }
+
+  getName() {
+    //ajax call
+  }
+
+  getNumberOfReviews() {
+    //ajax call
+  }
+
+  render() {
+    return (
+      <div id="property">
+        <div id="property-spacing">
+          <div id="property-name">{this.state.name}</div>
+          <Ratings />
+        </div>
       </div>
-    </button>
-  </div>
-);
+    );
+  }
+}
 
 export default Property;
