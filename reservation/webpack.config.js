@@ -1,28 +1,35 @@
-const webpack = require('webpack');
 const path = require('path');
+const SRC_DIR = path.join(__dirname, '/client');
+const DIST_DIR = path.join(__dirname, '/public');
+// DONT USE BABEL-LOADER 8, ONLY 7 || npm install -D babel-loader@7 babel-core babel-preset-env webpack
 
 module.exports = {
-  entry: './client/index.jsx',
+  mode: 'none',
+  entry: `${SRC_DIR}/index.jsx`,
+  output: {
+    path: DIST_DIR,
+    filename: 'bundle.js'
+  },
   module: {
     rules: [
       {
-        test: /\.(js|jsx)$/,
-        use: 'babel-loader',
-        exclude: /node_modules/
-      }
+        test: /\.jsx$/,
+        include: SRC_DIR,
+        exclude: [/(node_modules)/, /(routes)/, /(models)/, /(server)/],
+        loader: 'babel-loader',
+        query: {
+          presets: ['react', 'es2015']
+        }
+      },
+      {
+        test: /\.svg$/,
+        loader: 'svg-inline-loader'
+      },
+      {
+        test: /\.css$/,
+        loader: 'style-loader!css-loader'
+      },
     ]
-  },
-  resolve: {
-    extensions: [
-      '.js',
-      '.jsx'
-    ]
-  },
-  output: {
-    path: __dirname + '/public',
-    filename: 'bundle.js',
   }
-};
-
-
+}
 
