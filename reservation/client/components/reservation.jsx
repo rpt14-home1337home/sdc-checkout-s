@@ -31,9 +31,6 @@ class Reservation extends React.Component {
     return (
       <div>
         {this.state.showModal && <Modal handleClose={this.handleClose}/>}
-      <div id="image-container">
-        <img src="https://a0.muscache.com/4ea/air/v2/pictures/7ea52b34-8177-45ab-b5ad-d1cb83b6f006.jpg?t=r:w2500-h1500-sfit,e:fjpg-c90"/>
-      </div>
       <footer id="footer">
         <div id="container">
           <div id="footer-content">
