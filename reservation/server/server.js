@@ -7,6 +7,10 @@ const db = require('./db')
 const database = require('./db/checkout.js');
 const app = express();
 const port = process.env.PORT || 3002;
+const cors = require('cors');
+
+// Allow CORS
+app.use(cors());
 
 // Log all 4xx and 5xx responses
 app.use(morgan('dev'));
