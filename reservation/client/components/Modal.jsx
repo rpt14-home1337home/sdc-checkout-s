@@ -159,7 +159,7 @@ class Modal extends React.Component {
                                   type="text"
                                   placeholder="Checkout"
                                   autoComplete="off"
-                                  id="checkin-label2"
+                                  id="checkin-label"
                                   value={this.state.endDate && this.state.endDate.format('L')}
                                   onChange={(e) => console.log(e)}
                                   className={

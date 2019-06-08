@@ -612,19 +612,6 @@ img {
   text-shadow: 0 0 0 rgb(72, 72, 72);
 }
 
-#checkin-label2 {
-  font-weight: 300;
-  font-size: 17px;
-  line-height: 24px;
-  width: 100%;
-  vertical-align: middle;
-  margin: 0px;
-  padding: 8px;
-  background: rgb(255, 255, 255);
-  border: 0px;
-  color: transparent;
-  text-shadow: 0 0 0 rgb(72, 72, 72);
-}
 
 .checkin-label-select::placeholder {
   color: white;
@@ -635,10 +622,6 @@ img {
 }
 
 #checkin-label:focus {
-  outline: none;
-}
-
-#checkin-label2:focus {
   outline: none;
 }
 
