@@ -135,7 +135,7 @@ class Calendar extends React.Component {
         'blocked-day': isBlocked,
         'active-day': !isBlocked && !this.state.startDate || dateSelected < this.state.startDate && dateSelected !== this.state.endDate,
         'start-date-select': !isBlocked && dateSelected.isSame(this.state.startDate),
-        'date-range-span': !isBlocked && !isOutsideRange && dateSelected > this.state.startDate && dateSelected <= this.state.endDate,
+        'date-range-span': !isBlocked && !isOutsideRange && this.state.startDate && dateSelected > this.state.startDate && dateSelected <= this.state.endDate,
         'date-range-span-selected': !isBlocked && !isOutsideRange && dateSelected > this.state.startDate && dateSelected <= this.state.checkoutDate,
       });
 
