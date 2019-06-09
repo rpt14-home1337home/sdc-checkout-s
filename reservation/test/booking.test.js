@@ -15,4 +15,13 @@ describe('<Booking /> rendering', () => {
   it('should render one <Button>', () => {
     expect(wrapper.find(Button)).toHaveLength(1);
   });
+
+  it('should have a label called `Button`', () => {
+    expect(wrapper.find(Button).props().name).toEqual('Book');
+  });
+
+  it('should have a click handler`', () => {
+    console.log(wrapper.find(Button).props().handleClick)
+    expect(wrapper.find(Button).props().handleClick).toBeDefined();
+  });
 });
