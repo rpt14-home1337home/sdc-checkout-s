@@ -21,7 +21,6 @@ describe('<Booking /> rendering', () => {
   });
 
   it('should have a click handler`', () => {
-    console.log(wrapper.find(Button).props().handleClick)
     expect(wrapper.find(Button).props().handleClick).toBeDefined();
   });
 });
