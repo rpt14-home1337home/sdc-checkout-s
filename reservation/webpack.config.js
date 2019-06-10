@@ -13,23 +13,22 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.jsx$/,
-        include: SRC_DIR,
-        exclude: [/(node_modules)/, /(routes)/, /(models)/, /(server)/],
-        loader: 'babel-loader',
-        query: {
-          presets: ['react', 'es2015']
-        }
+        test: /\.(js|jsx)$/,
+        exclude: /node_modules/,
+        use: ['babel-loader']
       },
       {
-        test: /\.svg$/,
-        loader: 'svg-inline-loader'
+        test: /\.(css|scss)$/,
+        use: ['style-loader', 'css-loader']
       },
       {
-        test: /\.css$/,
-        loader: 'style-loader!css-loader'
-      },
+        test: /\.(gif|png)$/,
+        use: ['file-loader']
+      }
     ]
+  },
+  resolve: {
+    extensions: ['*', '.js', '.jsx']
   }
 }
 
