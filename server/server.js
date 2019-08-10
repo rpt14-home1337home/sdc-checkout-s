@@ -41,6 +41,20 @@ app.post('/', (req, res) => {
   });
 });
 
+// Deletes one record
+app.delete('/checkout', (req, res) => {
+  database.deleteRecord(req.body.id, () => {
+    res.end();
+  })
+})
+
+// Updates one record
+app.put('/checkout', (req, res) => {
+  database.alterRecord(req.body, () => {
+    res.end();
+  })
+})
+
 // Listen for requests
 app.listen(port, () => {
   console.log(`server running at: http://localhost:${port}`);
