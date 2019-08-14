@@ -52,8 +52,8 @@ app.delete('/checkout', (req, res) => {
 
 // Updates one record
 app.put('/checkout', (req, res) => {
-  database.alterRecord(req.body, () => {
-    res.end();
+  database.alterRecord(req.body, (err, results) => {
+    err ? res.status(500).send(err) : res.status(200).send(results);
   })
 })
 

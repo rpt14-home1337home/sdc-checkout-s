@@ -19,17 +19,19 @@ const insertRecord = (checkout, cb) => {
   });
 };
 
-const alterRecord = (checkout, cb) => {
-  //checkout object must have id prop
-  console.log(checkoput);
-  db.queryAsync(`UPDATE checkout SET checkin = ?, checkout = ? where id = ?`), checkout, (err, result) => {
+const alterRecord = (data, cb) => {
+  var query =  `update checkout set checkin = ?, checkout = ? where id = ?;`
+  data = [data.checkin, data.checkout, data.id];
+  db.queryAsync(query, data, (err, result) => {
     if (err) {
       console.log(err);
+      cb(err);
     }
-    console.log(`Altered record to ${JSON.stringify(checkout)}`);
-    cb();
-  }
+    console.log(`Altered record to ${JSON.stringify(data)}`);
+    cb(null, result);
+  });
 }
+
 const deleteRecord = (id, cb) => {
   db.queryAsync(`DELETE from checkout where id = ?`), id, (err, results) => {
     if (err) {
