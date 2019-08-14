@@ -21,8 +21,9 @@ app.use(morgan('common', {
 }));
 
 // Parse all requests
-app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+
 
 // Serve public folder
 app.use(express.static(path.join(__dirname, '../public')));
@@ -35,11 +36,26 @@ app.get('/checkout', (req, res) => {
 });
 
 // Checkout user
-app.post('/', (req, res) => {
-  database.insertRecord(req.body, () => {
-    res.end();
+app.post('/checkout', (req, res) => {
+  console.log(req.body, typeof req.body)
+   database.insertRecord(req.body, (err, results) => {
+    err ? res.status(500).send(err) : res.status(200).send(results);
   });
 });
+
+// Deletes one record
+app.delete('/checkout', (req, res) => {
+  database.deleteRecord(req.body.id, (err, results) => {
+    err ? res.status(500).send(err) : res.status(200).send(results);
+  })
+})
+
+// Updates one record
+app.put('/checkout', (req, res) => {
+  database.alterRecord(req.body, (err, results) => {
+    err ? res.status(500).send(err) : res.status(200).send(results);
+  })
+})
 
 // Listen for requests
 app.listen(port, () => {
