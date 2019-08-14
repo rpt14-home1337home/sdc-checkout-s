@@ -32,14 +32,17 @@ const alterRecord = (data, cb) => {
   });
 }
 
-const deleteRecord = (id, cb) => {
-  db.queryAsync(`DELETE from checkout where id = ?`), id, (err, results) => {
+const deleteRecord = (data, cb) => {
+  data = [data];
+  var query = `DELETE from checkout where id = ?`;
+  db.queryAsync(query, data, (err, results) => {
     if (err) {
       console.log(err);
+      cb(err);
     }
-    console.log(`Deleted record ${JSON.stringify(id)}`);
-    cb();
-  }
+    console.log(`Deleted record ${JSON.stringify(data)}`);
+    cb(null, results);
+  });
 }
 
 const deleteRecordsBatch = (startId, endId, cb) => {
