@@ -51,7 +51,9 @@ PUT path '/checkout'
       id: Number
       }
 
+DELETE path '/checkout'
 
+  - Deletes one record, must pass an id
 
 ### Installing Dependencies
 
