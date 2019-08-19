@@ -1,19 +1,22 @@
-const mysql = require('mysql');
-const createTables = require('./config');
-const Promise = require('bluebird');
-const database = 'airbnb';
+/* UNCOMMENT TO USE MYSQL DB */
 
-const connection = mysql.createConnection({
-  user: 'root',
-  password: ''
-});
+// const mysql = require('mysql');
+// const createTables = require('./config');
+// const Promise = require('bluebird');
+// const database = 'airbnb';
 
-const db = Promise.promisifyAll(connection);
+// const connection = mysql.createConnection({
+//   user: 'root',
+//   password: ''
+// });
 
-db.connectAsync()
-  .then(() => console.log(`Connected to ${database} database as ID ${db.threadId}`))
-  .then(() => db.queryAsync(`CREATE DATABASE IF NOT EXISTS ${database}`))
-  .then(() => db.queryAsync(`USE ${database}`))
-  .then(() => createTables(db));
+// const db = Promise.promisifyAll(connection);
 
-module.exports = db;
+// db.connectAsync()
+//   .then(() => console.log(`Connected to ${database} database as ID ${db.threadId}`))
+//   .then(() => db.queryAsync(`CREATE DATABASE IF NOT EXISTS ${database}`))
+//   .then(() => db.queryAsync(`USE ${database}`))
+//   .then(() => createTables(db));
+
+// module.exports = db;
+

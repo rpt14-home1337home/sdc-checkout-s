@@ -1,10 +1,18 @@
-//UNCOMMENT TO USE MYSQL
+const db = require('../index.js');
+const checkout = require('../models/checkout.js')
 
+const initialize = () => {
+  db.any(checkout())
+    .then(() => {
+      console.log('Checkout Table initialized');
+    })
+    .catch(e => {throw new Error(e)})
+};
 
-// const db = require('./index.js');
+initialize();
 
 // const getRecords = (cb) => {
-//   db.query('SELECT * FROM checkout', function (err, results) {
+//   db.queryAsync('SELECT * FROM checkout', function (err, results) {
 //     if (err) throw err;
 //     cb(results);
 //   });

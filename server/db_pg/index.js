@@ -1,10 +1,16 @@
-const { Client } = require('pg')
-const client = new Client();
-const Promise = require('bluebird');
+
+const promise = require('bluebird');
+const initOpts = { promiseLib: promise };
+const pgp = require('pg-promise')(initOpts);
 const database = 'airbnb';
+const connection = {
+  host: process.env.PGHOST || 'localhost',
+  port: process.env.PGPORT || '5432',
+  database: process.env.PGDATABASE || 'airbnb',
+  user: process.env.PGUSER || 'postgres',
+  password: process.env.PGPASSWORD
+};
 
-const db = Promise.promisifyAll(client);
+const db = pgp(connection);
 
-db.connectAsync()
-  .then(() => console.log('connected'))
-  .catch(e => console.error('connection error', e.stack))
+module.exports = db;
