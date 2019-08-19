@@ -3,7 +3,6 @@ const morgan = require('morgan');
 const bodyParser = require("body-parser");
 const path = require('path');
 const fs = require('fs');
-const db = require('./db')
 const database = require('./db/checkout.js');
 const app = express();
 const port = process.env.PORT || 3002;
