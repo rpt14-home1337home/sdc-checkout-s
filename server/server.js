@@ -3,7 +3,7 @@ const morgan = require('morgan');
 const bodyParser = require("body-parser");
 const path = require('path');
 const fs = require('fs');
-const database = require('./db/checkout.js');
+const db_msql = require('./db/checkout.js');
 const db_pg = require('./db_pg/controllers/index.js');
 const app = express();
 const port = process.env.PORT || 3002;
@@ -54,7 +54,7 @@ app.delete('/checkout', (req, res) => {
 
 // Updates one record
 app.put('/checkout', (req, res) => {
-  database.alterRecord(req.body, (err, results) => {
+  db_pg.alterRecord(req.body, (err, results) => {
     err ? res.status(500).send(err) : res.status(200).send(results);
   })
 })
