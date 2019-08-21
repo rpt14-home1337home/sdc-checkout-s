@@ -33,4 +33,20 @@ const deleteRecord = (data, cb) => {
     .catch(e => cb(e));
 }
 
-module.exports = {insertRecord, getRecords, deleteRecord};
+const alterRecord = (data, cb) => {
+  var data = [data.checkin, data.checkout, data.id];
+  var query = `update checkout set checkin = $1, checkout = $2 where id = $3`
+  db.any(query, data)
+    .then((res) => {
+      console.log(`Altered record to ${JSON.stringify(data)}`);
+      cb(null, res);
+    })
+    .catch(e => cb(e));
+}
+
+module.exports = {
+  insertRecord,
+  getRecords,
+  deleteRecord,
+  alterRecord
+};
