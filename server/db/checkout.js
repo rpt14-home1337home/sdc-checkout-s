@@ -11,7 +11,7 @@
 // };
 
 // const insertRecord = (checkout, cb) => {
-//   // console.log("RECORD CHECKOUT " + checkout)
+//   console.log("RECORD CHECKOUT " + checkout)
 //   db.queryAsync(`INSERT INTO checkout SET ?`, checkout, (err, results) => {
 //     if (err) {
 //       // console.log(err);

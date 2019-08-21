@@ -1,22 +1,4 @@
 const db = require('../index.js');
-const checkout = require('../models/checkout.js')
-
-const initialize = () => {
-  db.any(checkout())
-    .then(() => {
-      console.log('Checkout Table initialized');
-    })
-    .catch(e => {throw new Error(e)})
-};
-
-initialize();
-
-// const getRecords = (cb) => {
-//   db.queryAsync('SELECT * FROM checkout', function (err, results) {
-//     if (err) throw err;
-//     cb(results);
-//   });
-// };
 
 // const insertRecord = (checkout, cb) => {
 //   // console.log("RECORD CHECKOUT " + checkout)
@@ -30,54 +12,18 @@ initialize();
 //   });
 // };
 
-// const alterRecord = (data, cb) => {
-//   var query =  `update checkout set checkin = ?, checkout = ? where id = ?;`
-//   data = [data.checkin, data.checkout, data.id];
-//   db.queryAsync(query, data, (err, result) => {
-//     if (err) {
-//       console.log(err);
-//       cb(err);
-//     }
-//     console.log(`Altered record to ${JSON.stringify(data)}`);
-//     cb(null, result);
-//   });
-// }
+let insertRecord = (data, cb) => {
+  data = [data.checkin, data.checkout];
+  var query = `INSERT INTO checkout(checkin, checkout) VALUES ($1, $2)`;
+  db.any(query, data)
+    .then((res) => {
+      console.log(`Inserted ${data} into table`);
+      cb(null, res);
+    })
+    .catch((e) => {
+      console.log(e);
+      cb(e);
+    })
+}
 
-// const deleteRecord = (data, cb) => {
-//   data = [data];
-//   var query = `DELETE from checkout where id = ?`;
-//   db.queryAsync(query, data, (err, results) => {
-//     if (err) {
-//       console.log(err);
-//       cb(err);
-//     }
-//     console.log(`Deleted record ${JSON.stringify(data)}`);
-//     cb(null, results);
-//   });
-// }
-
-// const deleteRecordsBatch = (startId, endId, cb) => {
-//   db.queryAsync('DELETE from checkout where id >= ? && id <= ?'), [startId, endId], (err, results) => {
-//     if (err) {
-//       console.log(err);
-//     }
-//     console.log(`Deleted records ${JSON.stringify(startId)} to ${JSON.stringify(endId)}`);
-//     cb();
-//   }
-// }
-
-// const deleteRecordsAll = (cb) => {
-//   db.queryAsync('TRUNCATE checkout', (err, results) => {
-//     if (err) {
-//       console.log(err);
-//     }
-//     console.log(`Deleted all records in airbnb`);
-//     cb();
-//   })
-// }
-// module.exports.insertRecord = insertRecord;
-// module.exports.getRecords = getRecords;
-// module.exports.deleteRecord = deleteRecord;
-// module.exports.deleteRecordsBatch = deleteRecordsBatch;
-// module.exports.deleteRecordsAll = deleteRecordsAll;
-// module.exports.alterRecord = alterRecord;
+module.exports = {insertRecord};

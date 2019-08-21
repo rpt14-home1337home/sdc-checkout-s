@@ -1,4 +1,3 @@
-
 const promise = require('bluebird');
 const initOpts = { promiseLib: promise };
 const pgp = require('pg-promise')(initOpts);

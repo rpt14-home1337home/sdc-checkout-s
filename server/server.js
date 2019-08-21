@@ -4,9 +4,11 @@ const bodyParser = require("body-parser");
 const path = require('path');
 const fs = require('fs');
 const database = require('./db/checkout.js');
+const db_pg = require('./db_pg/controllers/index.js');
 const app = express();
 const port = process.env.PORT || 3002;
 const cors = require('cors');
+
 
 // Allow CORS
 app.use(cors());
@@ -37,7 +39,7 @@ app.get('/checkout', (req, res) => {
 // Checkout user
 app.post('/checkout', (req, res) => {
   console.log(req.body, typeof req.body)
-   database.insertRecord(req.body, (err, results) => {
+   db_pg.insertRecord(req.body, (err, results) => {
     err ? res.status(500).send(err) : res.status(200).send(results);
   });
 });
