@@ -21,4 +21,16 @@ let getRecords = (cb) => {
     .catch(e => cb(e));
 }
 
-module.exports = {insertRecord, getRecords};
+
+const deleteRecord = (data, cb) => {
+  data = [data];
+  var query = `DELETE from checkout where id = $1`;
+  db.any(query, data)
+    .then((res) => {
+      console.log(`Deleted ${data} from table`);
+      cb(null, res);
+    })
+    .catch(e => cb(e));
+}
+
+module.exports = {insertRecord, getRecords, deleteRecord};

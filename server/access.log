@@ -133,3 +133,5 @@
 ::ffff:127.0.0.1 - - [21/Aug/2019:15:01:45 +0000] "GET /checkout HTTP/1.1" 200 0
 ::ffff:127.0.0.1 - - [21/Aug/2019:15:06:28 +0000] "GET /checkout HTTP/1.1" 200 0
 ::ffff:127.0.0.1 - - [21/Aug/2019:15:07:06 +0000] "GET /checkout HTTP/1.1" 200 85
+::ffff:127.0.0.1 - - [21/Aug/2019:16:24:08 +0000] "DELETE /checkout HTTP/1.1" 200 2
+::ffff:127.0.0.1 - - [21/Aug/2019:16:24:23 +0000] "DELETE /checkout HTTP/1.1" 200 2
