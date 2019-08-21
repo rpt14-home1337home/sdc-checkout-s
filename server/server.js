@@ -31,7 +31,8 @@ app.use(express.static(path.join(__dirname, '../public')));
 
 // Checkout dates
 app.get('/checkout', (req, res) => {
-  database.getRecords((results) => {
+  db_pg.getRecords((results) => {
+    console.log(results);
     res.send(results);
   });
 });

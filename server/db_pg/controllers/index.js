@@ -1,17 +1,5 @@
 const db = require('../index.js');
 
-// const insertRecord = (checkout, cb) => {
-//   // console.log("RECORD CHECKOUT " + checkout)
-//   db.queryAsync(`INSERT INTO checkout SET ?`, checkout, (err, results) => {
-//     if (err) {
-//       // console.log(err);
-//       cb(err);
-//     }
-//     // console.log(`Inserted record ${JSON.stringify(checkout)}`);
-//     cb(null, results);
-//   });
-// };
-
 let insertRecord = (data, cb) => {
   data = [data.checkin, data.checkout];
   var query = `INSERT INTO checkout(checkin, checkout) VALUES ($1, $2)`;
@@ -26,4 +14,11 @@ let insertRecord = (data, cb) => {
     })
 }
 
-module.exports = {insertRecord};
+
+let getRecords = (cb) => {
+  db.any(`SELECT * FROM checkout`)
+    .then(res => cb(res))
+    .catch(e => cb(e));
+}
+
+module.exports = {insertRecord, getRecords};
