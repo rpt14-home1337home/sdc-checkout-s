@@ -11,7 +11,7 @@ const connection = mysql.createConnection({
 const db = Promise.promisifyAll(connection);
 
 const seedDatabase = () => {
-  for (let i = 1; i < 10000000; i++) {
+  for (let i = 1; i < 100; i++) {
     const now = moment([moment().year(), moment().month(), 1]);
     startDate = now.add(i, 'month')
     endDate = startDate.add(Math.floor(Math.random() * 7), 'days');
