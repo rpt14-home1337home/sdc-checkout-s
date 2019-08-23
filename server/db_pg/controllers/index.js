@@ -15,7 +15,7 @@ let insertRecord = (data, cb) => {
 }
 
 
-let getRecords = (cb) => {
+let getRecords = (id, cb) => {
   db.any(`SELECT * FROM checkout`)
     .then(res => cb(res))
     .catch(e => cb(e));
