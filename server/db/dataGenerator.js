@@ -2,7 +2,7 @@ const promise = require('bluebird');
 const path = require('path');
 const fs = require('fs');
 const csvWriter = require('csv-write-stream')
-const output = 'seedData.csv';
+const output = 'seedData4.csv';
 require('datejs');
 
 
@@ -19,10 +19,10 @@ const makeNegative = (val) => {
 
 const makeData = (start, end) => {
   var data = [];
-  var q = start + 1;
-  for (var i = start; i < end;) {
-    i += 2;
-    q += 2;
+  var q = end - 1;
+  for (var i = end; i > start;) {
+    i -= 2;
+    q -= 2;
     var negI = makeNegative(i);
     var negQ = makeNegative(q);
     var obj = makeObj(Date.today().addDays(negI), Date.today().addDays(negQ));
@@ -33,7 +33,6 @@ const makeData = (start, end) => {
 
 var data = makeData(1, 20000000);
 var headers = ["checkin", "checkout"];
-
 const writeData = (headers, data, output) => {
   var writer = csvWriter({ headers })
   writer.pipe(fs.createWriteStream(output))
