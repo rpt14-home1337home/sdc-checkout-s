@@ -175,3 +175,17 @@
 ::ffff:127.0.0.1 - - [23/Aug/2019:16:32:06 +0000] "GET /checkout HTTP/1.1" 200 426
 ::ffff:127.0.0.1 - - [23/Aug/2019:16:35:13 +0000] "GET /checkout HTTP/1.1" 200 2636
 ::ffff:127.0.0.1 - - [23/Aug/2019:16:35:45 +0000] "GET /checkout HTTP/1.1" 200 2636
+::ffff:127.0.0.1 - - [27/Aug/2019:16:44:48 +0000] "POST /checkout HTTP/1.1" 200 2
+::ffff:127.0.0.1 - - [27/Aug/2019:16:50:01 +0000] "POST /checkout HTTP/1.1" 200 2
+::ffff:127.0.0.1 - - [27/Aug/2019:17:37:51 +0000] "GET /checkout/date HTTP/1.1" 200 2
+::ffff:127.0.0.1 - - [27/Aug/2019:17:39:00 +0000] "POST /checkout/ HTTP/1.1" 200 2
+::ffff:127.0.0.1 - - [27/Aug/2019:17:39:25 +0000] "GET /checkout/date HTTP/1.1" 200 90
+::ffff:127.0.0.1 - - [27/Aug/2019:18:06:16 +0000] "POST /checkout/ HTTP/1.1" 200 2
+::ffff:127.0.0.1 - - [27/Aug/2019:18:08:04 +0000] "POST /checkout/ HTTP/1.1" 200 2
+::ffff:127.0.0.1 - - [27/Aug/2019:18:08:39 +0000] "POST /checkout/ HTTP/1.1" 200 2
+::ffff:127.0.0.1 - - [27/Aug/2019:18:10:08 +0000] "POST /checkout/ HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [27/Aug/2019:18:13:04 +0000] "POST /checkout/ HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [27/Aug/2019:18:14:46 +0000] "POST /checkout/ HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [27/Aug/2019:18:15:53 +0000] "POST /checkout/ HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [27/Aug/2019:18:24:02 +0000] "POST /checkout/ HTTP/1.1" 500 2
+::ffff:127.0.0.1 - - [27/Aug/2019:18:24:24 +0000] "POST /checkout/ HTTP/1.1" 500 2

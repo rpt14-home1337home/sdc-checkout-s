@@ -1,24 +1,40 @@
 const db = require('../index.js');
 
 let insertRecord = (data, cb) => {
-  data = [data.checkin, data.checkout];
-  var query = `INSERT INTO checkout(checkin, checkout) VALUES ($1, $2)`;
-  db.any(query, data)
-    .then((res) => {
-      console.log(`Inserted ${data} into table`);
-      cb(null, res);
-    })
-    .catch((e) => {
-      console.log(e);
-      cb(e);
-    })
+  //check if records exist for date range
+  getRecordsByDate(data, (err, records) => {
+    if (err) {
+      cb(err);
+    } else if (records.length > 0) {
+      err = new Error('Invalid date range: records exist within interval provided. ' + JSON.stringify(records) );
+      cb(err);
+    } else {
+      //if no records exist, insert new record
+      data = [data.id, data.checkin, data.checkout];
+      var query = `INSERT INTO checkout(prop_id, checkin, checkout) VALUES ($1, $2, $3)`;
+      db.any(query, data)
+        .then((res) => {
+          console.log(`Inserted ${data} into table`);
+          cb(null, res);
+        })
+        .catch((e) => {
+          console.log(e);
+          cb(e);
+        })
+    }
+
+  })
 }
 
-/*** Limit is 731 because you can't book past 2 years in the future
- * so there's no need to retrieve booking past 731 max possble days
- */
-let getRecords = (cb) => {
-  db.any(`SELECT * FROM checkout ORDER BY id DESC LIMIT 731`)
+let getRecordsByProp = (id, cb) => {
+  db.any(`SELECT * FROM checkout WHERE prop_id = $1`, [id])
+    .then(res => cb(null, res))
+    .catch(e => cb(e));
+}
+
+let getRecordsByDate = (data, cb) => {
+  data = [data.checkin, data.checkout];
+  db.any('SELECT prop_id, checkin, checkout FROM checkout WHERE checkin >= $1 AND checkout < $2', data)
     .then(res => cb(null, res))
     .catch(e => cb(e));
 }
@@ -48,7 +64,8 @@ const alterRecord = (data, cb) => {
 //
 module.exports = {
   insertRecord,
-  getRecords,
+  getRecordsByProp,
   deleteRecord,
-  alterRecord
+  alterRecord,
+  getRecordsByDate
 };
