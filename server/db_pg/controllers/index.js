@@ -41,8 +41,8 @@ let getRecordsByDate = (data, cb) => {
 
 
 const deleteRecord = (data, cb) => {
-  data = [data];
-  var query = `DELETE from checkout where id = $1`;
+  data = [data.id, data.checkin, data.checkout];
+  var query = `DELETE from checkout where prop_id = $1 AND checkin = $2 AND checkout = $3`;
   db.any(query, data)
     .then((res) => {
       console.log(`Deleted ${data} from table`);

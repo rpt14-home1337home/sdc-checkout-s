@@ -61,7 +61,7 @@ app.post('/checkout', (req, res) => {
 
 // Deletes one record
 app.delete('/checkout', (req, res) => {
-  db_pg.deleteRecord(req.body.id, (err, results) => {
+  db_pg.deleteRecord(req.body, (err, results) => {
     err ? res.status(500).send(err) : res.status(200).send(results);
   })
 })
