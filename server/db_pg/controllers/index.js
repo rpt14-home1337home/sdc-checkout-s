@@ -52,8 +52,8 @@ const deleteRecord = (data, cb) => {
 }
 
 const alterRecord = (data, cb) => {
-  var data = [data.checkin, data.checkout, data.id];
-  var query = `update checkout set checkin = $1, checkout = $2 where id = $3`
+  var data = [data.id, data.oldCheckin, data.oldCheckout, data.checkin, data.checkout];
+  var query = `update checkout set checkin = $4, checkout = $5 where prop_id = $1 AND checkin = $2 AND checkout = $3`
   db.any(query, data)
     .then((res) => {
       console.log(`Altered record to ${JSON.stringify(data)}`);
