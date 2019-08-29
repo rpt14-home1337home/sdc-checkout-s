@@ -29,25 +29,39 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // Serve public folder
 app.use(express.static(path.join(__dirname, '../public')));
 
-// Checkout dates
-app.get('/checkout', (req, res) => {
-  db_pg.getRecords((results) => {
-    console.log(results);
-    res.send(results);
+// Get by property ID
+app.get('/checkout/prop', (req, res) => {
+  let id = req.body.id;
+  db_pg.getRecordsByProp(id, (err, results) => {
+    if (err) {
+      throw new Error(err)
+    } else {
+      res.send(results);
+    }
+  });
+});
+
+app.get('/checkout/date', (req, res) => {
+  db_pg.getRecordsByDate(req.body, (err, results) => {
+    if (err) {
+      throw new Error(err)
+    } else {
+      res.send(results);
+    }
   });
 });
 
 // Checkout user
 app.post('/checkout', (req, res) => {
-  console.log(req.body, typeof req.body)
    db_pg.insertRecord(req.body, (err, results) => {
+     console.log(err);
     err ? res.status(500).send(err) : res.status(200).send(results);
   });
 });
 
 // Deletes one record
 app.delete('/checkout', (req, res) => {
-  db_pg.deleteRecord(req.body.id, (err, results) => {
+  db_pg.deleteRecord(req.body, (err, results) => {
     err ? res.status(500).send(err) : res.status(200).send(results);
   })
 })
