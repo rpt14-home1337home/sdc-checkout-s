@@ -1,39 +1,47 @@
-const promise = require('bluebird');
-const path = require('path');
 const fs = require('fs');
 const csvWriter = require('csv-write-stream')
-const output = 'seedData.csv';
+const output = 'seedData7.csv';
 require('datejs');
 
 
-const makeObj = (checkin, checkout) => {
+const makeObj = (propId, checkin, checkout) => {
   return {
+    propId,
     checkin,
     checkout
   }
 }
 
-const makeNegative = (val) => {
-  return val - val - val;
+const getRandomNum = () => {
+  return Math.floor(Math.random() * 6) + 1;
 }
 
-const makeData = (start, end) => {
+const getDates= q => {
+  var checkinDate = Date.august().first().monday();
+  var checkoutDate = Date.august().first().monday().addDays(getRandomNum());
+  if (q === 2) {
+    checkinDate = Date.august().second().monday();
+    checkoutDate = Date.august().second().monday().addDays(getRandomNum());
+  } else if (q === 3) {
+    checkinDate = Date.august().third().monday();
+    checkoutDate = Date.august().third().monday().addDays(getRandomNum());
+  }
+  return [checkinDate, checkoutDate];
+}
+
+const makeData = () => {
   var data = [];
-  var q = start + 1;
-  for (var i = start; i < end;) {
-    i += 2;
-    q += 2;
-    var negI = makeNegative(i);
-    var negQ = makeNegative(q);
-    var obj = makeObj(Date.today().addDays(negI), Date.today().addDays(negQ));
-    data.push(obj);
+  for (var i = 1; i < 100; i++) {
+    for (var q = 1; q < 4; q++) {
+      var dates = getDates(q);
+      data.push(makeObj(i, dates[0], dates[1]));
+    }
   }
   return data;
 }
 
-var data = makeData(1, 20000000);
-var headers = ["checkin", "checkout"];
-
+var data = makeData();
+var headers = ["propId", "checkin", "checkout"];
 const writeData = (headers, data, output) => {
   var writer = csvWriter({ headers })
   writer.pipe(fs.createWriteStream(output))
