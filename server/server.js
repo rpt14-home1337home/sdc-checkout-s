@@ -28,6 +28,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 // Serve public folder
 app.use(express.static(path.join(__dirname, '../public')));
+app.use('/:id', express.static(path.join(__dirname, '../public')));
 
 // Get by property ID
 app.get('/checkout/prop', (req, res) => {
@@ -41,8 +42,8 @@ app.get('/checkout/prop', (req, res) => {
   });
 });
 
-app.get('/checkout/date', (req, res) => {
-  db_pg.getRecordsByDate(req.body, (err, results) => {
+app.get('/checkout/prop', (req, res) => {
+  db_pg.getRecordsByProp(req.body, (err, results) => {
     if (err) {
       throw new Error(err)
     } else {

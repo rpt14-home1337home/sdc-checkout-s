@@ -27,7 +27,7 @@ let insertRecord = (data, cb) => {
 }
 
 let getRecordsByProp = (id, cb) => {
-  db.any(`SELECT * FROM checkout WHERE prop_id = $1`, [id])
+  db.any(`SELECT * FROM checkout WHERE propid = $1`, [id])
     .then(res => cb(null, res))
     .catch(e => cb(e));
 }
