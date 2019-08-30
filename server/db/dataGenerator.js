@@ -1,6 +1,6 @@
 const fs = require('fs');
 const csvWriter = require('csv-write-stream')
-const output = 'seedData7.csv';
+const output = 'seedData8.csv';
 require('datejs');
 
 
@@ -17,14 +17,14 @@ const getRandomNum = () => {
 }
 
 const getDates= q => {
-  var checkinDate = Date.august().first().monday().toString("d");
-  var checkoutDate = Date.august().first().monday().addDays(getRandomNum()).toString("d");
+  var checkinDate = Date.august().first().monday().toString("yyyy/M/d");
+  var checkoutDate = Date.august().first().monday().addDays(getRandomNum()).toString("yyyy/M/d");
   if (q === 2) {
-    checkinDate = Date.august().second().monday().toString("d");
-    checkoutDate = Date.august().second().monday().addDays(getRandomNum()).toString("d");
+    checkinDate = Date.august().second().monday().toString("yyyy/M/d");
+    checkoutDate = Date.august().second().monday().addDays(getRandomNum()).toString("yyyy/M/d");
   } else if (q === 3) {
-    checkinDate = Date.august().third().monday().toString("d");
-    checkoutDate = Date.august().third().monday().addDays(getRandomNum()).toString("d");
+    checkinDate = Date.august().third().monday().toString("yyyy/M/d");
+    checkoutDate = Date.august().third().monday().addDays(getRandomNum()).toString("yyyy/M/d");
   }
   return [checkinDate, checkoutDate];
 }
