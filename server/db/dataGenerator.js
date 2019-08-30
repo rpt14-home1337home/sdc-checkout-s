@@ -17,18 +17,17 @@ const getRandomNum = () => {
 }
 
 const getDates= q => {
-  var checkinDate = Date.august().first().monday();
-  var checkoutDate = Date.august().first().monday().addDays(getRandomNum());
+  var checkinDate = Date.august().first().monday().toString("d");
+  var checkoutDate = Date.august().first().monday().addDays(getRandomNum()).toString("d");
   if (q === 2) {
-    checkinDate = Date.august().second().monday();
-    checkoutDate = Date.august().second().monday().addDays(getRandomNum());
+    checkinDate = Date.august().second().monday().toString("d");
+    checkoutDate = Date.august().second().monday().addDays(getRandomNum()).toString("d");
   } else if (q === 3) {
-    checkinDate = Date.august().third().monday();
-    checkoutDate = Date.august().third().monday().addDays(getRandomNum());
+    checkinDate = Date.august().third().monday().toString("d");
+    checkoutDate = Date.august().third().monday().addDays(getRandomNum()).toString("d");
   }
   return [checkinDate, checkoutDate];
 }
-
 const makeData = () => {
   var data = [];
   for (var i = 1; i < 100; i++) {
