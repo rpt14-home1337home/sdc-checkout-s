@@ -28,10 +28,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 // Serve public folder
 app.use(express.static(path.join(__dirname, '../public')));
+app.use('/:id', express.static(path.join(__dirname, '../public')));
 
 // Get by property ID
-app.get('/checkout/prop', (req, res) => {
-  let id = req.body.id;
+app.get('/checkout/prop/:id', (req, res) => {
+  id = path.basename(req.url)
   db_pg.getRecordsByProp(id, (err, results) => {
     if (err) {
       throw new Error(err)
@@ -41,18 +42,9 @@ app.get('/checkout/prop', (req, res) => {
   });
 });
 
-app.get('/checkout/date', (req, res) => {
-  db_pg.getRecordsByDate(req.body, (err, results) => {
-    if (err) {
-      throw new Error(err)
-    } else {
-      res.send(results);
-    }
-  });
-});
-
 // Checkout user
-app.post('/checkout', (req, res) => {
+app.post('/checkout/book/:id', (req, res) => {
+  req.body.id = path.basename(req.url);
    db_pg.insertRecord(req.body, (err, results) => {
      console.log(err);
     err ? res.status(500).send(err) : res.status(200).send(results);
@@ -60,14 +52,14 @@ app.post('/checkout', (req, res) => {
 });
 
 // Deletes one record
-app.delete('/checkout', (req, res) => {
+app.delete('/checkout/:id', (req, res) => {
   db_pg.deleteRecord(req.body, (err, results) => {
     err ? res.status(500).send(err) : res.status(200).send(results);
   })
 })
 
 // Updates one record
-app.put('/checkout', (req, res) => {
+app.put('/checkout/:id', (req, res) => {
   db_pg.alterRecord(req.body, (err, results) => {
     err ? res.status(500).send(err) : res.status(200).send(results);
   })
