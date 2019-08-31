@@ -1,29 +1,17 @@
 const db = require('../index.js');
 
 let insertRecord = (data, cb) => {
-  //check if records exist for date range
-  getRecordsByDate(data, (err, records) => {
-    if (err) {
-      cb(err);
-    } else if (records.length > 0) {
-      err = new Error('Invalid date range: records exist within interval provided. ' + JSON.stringify(records) );
-      cb(err);
-    } else {
-      //if no records exist, insert new record
-      data = [data.id, data.checkin, data.checkout];
-      var query = `INSERT INTO checkout(prop_id, checkin, checkout) VALUES ($1, $2, $3)`;
-      db.any(query, data)
-        .then((res) => {
-          console.log(`Inserted ${data} into table`);
-          cb(null, res);
-        })
-        .catch((e) => {
-          console.log(e);
-          cb(e);
-        })
-    }
-
-  })
+  data = [data.id, data.checkin, data.checkout];
+  var query = `INSERT INTO checkout(propid, checkin, checkout) VALUES ($1, $2, $3)`;
+  db.any(query, data)
+    .then((res) => {
+      console.log(`Inserted ${data} into table`);
+      cb(null, res);
+    })
+    .catch((e) => {
+      console.log(e);
+      cb(e);
+    })
 }
 
 let getRecordsByProp = (id, cb) => {
@@ -32,17 +20,9 @@ let getRecordsByProp = (id, cb) => {
     .catch(e => cb(e));
 }
 
-let getRecordsByDate = (data, cb) => {
-  data = [data.checkin, data.checkout];
-  db.any('SELECT prop_id, checkin, checkout FROM checkout WHERE checkin >= $1 AND checkout < $2', data)
-    .then(res => cb(null, res))
-    .catch(e => cb(e));
-}
-
-
 const deleteRecord = (data, cb) => {
   data = [data.id, data.checkin, data.checkout];
-  var query = `DELETE from checkout where prop_id = $1 AND checkin = $2 AND checkout = $3`;
+  var query = `DELETE from checkout where propid = $1 AND checkin = $2 AND checkout = $3`;
   db.any(query, data)
     .then((res) => {
       console.log(`Deleted ${data} from table`);
@@ -67,5 +47,4 @@ module.exports = {
   getRecordsByProp,
   deleteRecord,
   alterRecord,
-  getRecordsByDate
 };
