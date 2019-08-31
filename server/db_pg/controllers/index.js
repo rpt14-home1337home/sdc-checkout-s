@@ -27,14 +27,7 @@ let insertRecord = (data, cb) => {
 }
 
 let getRecordsByProp = (id, cb) => {
-  db.any(`SELECT * FROM checkout WHERE prop_id = $1`, [id])
-    .then(res => cb(null, res))
-    .catch(e => cb(e));
-}
-
-let getRecordsByDate = (data, cb) => {
-  data = [data.checkin, data.checkout];
-  db.any('SELECT prop_id, checkin, checkout FROM checkout WHERE checkin >= $1 AND checkout < $2', data)
+    db.any(`SELECT * FROM checkout WHERE propid = $1`, [id])
     .then(res => cb(null, res))
     .catch(e => cb(e));
 }
@@ -42,8 +35,7 @@ let getRecordsByDate = (data, cb) => {
 
 const deleteRecord = (data, cb) => {
   data = [data.id, data.checkin, data.checkout];
-  var query = `DELETE from checkout where prop_id = $1 AND checkin = $2 AND checkout = $3`;
-  db.any(query, data)
+  var query = `DELETE from checkout where propid = $1 AND checkin = $2 AND checkout = $3`;  db.any(query, data)
     .then((res) => {
       console.log(`Deleted ${data} from table`);
       cb(null, res);
@@ -66,6 +58,5 @@ module.exports = {
   insertRecord,
   getRecordsByProp,
   deleteRecord,
-  alterRecord,
-  getRecordsByDate
+  alterRecord
 };
