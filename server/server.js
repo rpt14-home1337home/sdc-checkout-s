@@ -1,10 +1,11 @@
+require('newrelic');
 const express = require('express');
 const morgan = require('morgan');
 const bodyParser = require("body-parser");
 const path = require('path');
 const fs = require('fs');
-const db_msql = require('./db/checkout.js');
-const db_pg = require('./db_pg/controllers/index.js');
+const db_msql = require('./databases/db_sql/checkout.js');
+const db_pg = require('./databases/db_pg/controllers/index.js');
 const app = express();
 const port = process.env.PORT || 3002;
 const cors = require('cors');
@@ -28,32 +29,38 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 // Serve public folder
 app.use(express.static(path.join(__dirname, '../public')));
+app.use('/:id', express.static(path.join(__dirname, '../public')));
 
-// Checkout dates
-app.get('/checkout', (req, res) => {
-  db_pg.getRecords((results) => {
-    console.log(results);
-    res.send(results);
+// Get by property ID
+app.get('/checkout/prop/:id', (req, res) => {
+  id = path.basename(req.url)
+  db_pg.getRecordsByProp(id, (err, results) => {
+    if (err) {
+      throw new Error(err)
+    } else {
+      res.send(results);
+    }
   });
 });
 
 // Checkout user
-app.post('/checkout', (req, res) => {
-  console.log(req.body, typeof req.body)
+app.post('/checkout/book/:id', (req, res) => {
+  req.body.id = path.basename(req.url);
    db_pg.insertRecord(req.body, (err, results) => {
+     console.log(err);
     err ? res.status(500).send(err) : res.status(200).send(results);
   });
 });
 
 // Deletes one record
-app.delete('/checkout', (req, res) => {
-  db_pg.deleteRecord(req.body.id, (err, results) => {
+app.delete('/checkout/:id', (req, res) => {
+  db_pg.deleteRecord(req.body, (err, results) => {
     err ? res.status(500).send(err) : res.status(200).send(results);
   })
 })
 
 // Updates one record
-app.put('/checkout', (req, res) => {
+app.put('/checkout/:id', (req, res) => {
   db_pg.alterRecord(req.body, (err, results) => {
     err ? res.status(500).send(err) : res.status(200).send(results);
   })

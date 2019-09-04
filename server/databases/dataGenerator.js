@@ -1,6 +1,6 @@
 const fs = require('fs');
 const csvWriter = require('csv-write-stream')
-const output = 'seedData7.csv';
+const output = 'seedData8.csv';
 require('datejs');
 
 
@@ -28,7 +28,6 @@ const getDates= q => {
   }
   return [checkinDate, checkoutDate];
 }
-
 const makeData = () => {
   var data = [];
   for (var i = 1; i < 100; i++) {
