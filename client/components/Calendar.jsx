@@ -24,13 +24,24 @@ class Calendar extends React.Component {
 
   componentDidMount() {
     document.addEventListener('mousedown', this.handleClick, false);
-    fetch('http://localhost:3002/checkout')
+    var id = this.getId();
+    fetch(`http://localhost:3002/checkout/prop/${id}`)
     .then(res => res.json())
     .then((json) => {
       this.setState({
         blockedDates: json
       });
     });
+  }
+
+  getId() {
+    var path = window.location.pathname;
+    if (path === '/') {
+      path = '1'
+    }
+    const regex = /[0-9]/g;
+    const id = path.match(regex).join('');
+    return id;
   }
 
   componentWillUnmount() {

@@ -1,7 +1,6 @@
 const promise = require('bluebird');
 const initOpts = { promiseLib: promise };
 const pgp = require('pg-promise')(initOpts);
-const database = 'airbnb';
 const connection = {
   host: process.env.PGHOST || 'localhost',
   port: process.env.PGPORT || '5432',
