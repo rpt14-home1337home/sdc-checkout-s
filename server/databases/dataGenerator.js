@@ -1,6 +1,6 @@
 const fs = require('fs');
 const csvWriter = require('csv-write-stream')
-const output = 'seedData8.csv';
+const output = 'seedData.csv';
 require('datejs');
 
 
