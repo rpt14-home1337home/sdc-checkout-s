@@ -104,6 +104,16 @@ class Modal extends React.Component {
     }
   }
 
+  getId() {
+    var path = window.location.pathname;
+    if (path === '/') {
+      path = '1'
+    }
+    const regex = /[0-9]/g;
+    const id = path.match(regex).join('');
+    return id;
+  }
+
   handleGuest(e) {
     e.preventDefault();
     this.setState({

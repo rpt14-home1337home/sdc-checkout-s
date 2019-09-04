@@ -48,6 +48,17 @@ class Calendar extends React.Component {
     document.removeEventListener('mousedown', this.handleClick, false);
   }
 
+  getId() {
+    var path = window.location.pathname;
+    if (path === '/') {
+      path = '1'
+    }
+    const regex = /[0-9]/g;
+    const id = path.match(regex).join('');
+    return id;
+  }
+
+
   handleClick(e) {
     if (this.node.contains(e.target)) {
       return;

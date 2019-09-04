@@ -33,19 +33,18 @@ app.use('/:id', express.static(path.join(__dirname, '../public')));
 
 // Get by property ID
 app.get('/checkout/prop/:id', (req, res) => {
-  var id = path.basename(req.url)
+  id = path.basename(req.url)
   db_pg.getRecordsByProp(id, (err, results) => {
     if (err) {
       throw new Error(err)
     } else {
-        res.send(results);
+      res.send(results);
     }
   });
 });
 
 // Checkout user
 app.post('/checkout/book/:id', (req, res) => {
-  console.log(req.body);
   req.body.id = path.basename(req.url);
    db_pg.insertRecord(req.body, (err, results) => {
      console.log(err);

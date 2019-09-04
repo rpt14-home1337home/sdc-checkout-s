@@ -4,7 +4,7 @@ const pgp = require('pg-promise')(initOpts);
 const connection = {
   host: process.env.PGHOST || 'localhost',
   port: process.env.PGPORT || '5432',
-  database: process.env.PGDATABASE || 'airbnb',
+  database: 'airbnb_test',
   user: process.env.PGUSER || 'postgres',
   password: process.env.PGPASSWORD
 };
