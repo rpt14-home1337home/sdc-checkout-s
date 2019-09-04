@@ -10,3 +10,5 @@ seedData.csv
 report.20190815.165123.45059.001.json
 
 >>>>>>> eaab166fd0d485894b7ba31e179038bfb5196bd0
+newrelic.js
+newrelic_agent.log
