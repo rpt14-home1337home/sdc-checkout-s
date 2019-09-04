@@ -75,7 +75,8 @@ class Modal extends React.Component {
     } else if (!this.state.endDate) {
       document.getElementById('endDate').focus();
     } else {
-      fetch('http://localhost:3002/checkout', {
+      var id = this.getId();
+      fetch(`http://localhost:3002/checkout/book/${id}`, {
         method: 'POST',
         body: JSON.stringify({
           checkin: this.state.startDate,
@@ -89,6 +90,16 @@ class Modal extends React.Component {
         this.props.handleClose();
       });
     }
+  }
+
+  getId() {
+    var path = window.location.pathname;
+    if (path === '/') {
+      path = '1'
+    }
+    const regex = /[0-9]/g;
+    const id = path.match(regex).join('');
+    return id;
   }
 
   handleGuest(e) {
