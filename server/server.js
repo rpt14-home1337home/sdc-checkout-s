@@ -47,7 +47,6 @@ app.get('/checkout/prop/:id', (req, res) => {
 app.post('/checkout/book/:id', (req, res) => {
   req.body.id = path.basename(req.url);
    db.insertRecord(req.body, (err, results) => {
-     console.log(err);
     err ? res.status(500).send(err) : res.status(200).send(results);
   });
 });
