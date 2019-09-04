@@ -4,4 +4,5 @@ report.20190815.165123.45059.001.json
 seedData8.csv
 seedData9.csv
 server/access.log
-
+newrelic.agentlog.txt
+newrelic.js

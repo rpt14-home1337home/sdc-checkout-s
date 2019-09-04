@@ -1,10 +1,11 @@
+require('newrelic');
 const express = require('express');
 const morgan = require('morgan');
 const bodyParser = require("body-parser");
 const path = require('path');
 const fs = require('fs');
-const db_msql = require('./db/checkout.js');
-const db_pg = require('./db_pg/controllers/index.js');
+const db_msql = require('./databases/db_sql/checkout.js');
+const db_pg = require('./databases/db_pg/controllers/index.js');
 const app = express();
 const port = process.env.PORT || 3002;
 const cors = require('cors');
@@ -32,7 +33,7 @@ app.use('/:id', express.static(path.join(__dirname, '../public')));
 
 // Get by property ID
 app.get('/checkout/prop/:id', (req, res) => {
-  id = path.basename(req.url)
+  var id = path.basename(req.url)
   db_pg.getRecordsByProp(id, (err, results) => {
     if (err) {
       throw new Error(err)
@@ -44,6 +45,7 @@ app.get('/checkout/prop/:id', (req, res) => {
 
 // Checkout user
 app.post('/checkout/book/:id', (req, res) => {
+  console.log(req.body);
   req.body.id = path.basename(req.url);
    db_pg.insertRecord(req.body, (err, results) => {
      console.log(err);
