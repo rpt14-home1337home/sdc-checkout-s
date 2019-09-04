@@ -65,3 +65,14 @@ npm install -g webpack
 npm install
 ```
 
+### Connecting to Database
+
+  - Ensure Postgres is running and has an open port of 5432
+  - npm server/databases/db_pg/controllers/init.js
+
+### Seeding Database
+
+  - npm server/databases/dataGenerator.js
+  - Go to postgres command line
+    - airbnb=# \COPY checkout(propid, checkin, checkout)
+      FROM 'FULL_PATH_TO_SEEDDATA.csv' DELIMITER ',' CSV HEADER;
