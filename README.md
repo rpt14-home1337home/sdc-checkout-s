@@ -34,24 +34,25 @@ GET path '/checkout'
 
   - Fetches all checkout dates
 
-POST path '/'
+POST path '/checkout/book/:id'
 
-  - Posts one record, must pass an object with two date values as properties
+  - Posts one record, must pass an object with two date values and an id as properties
     - {
+      id: 1,
       checkin: 2019-08-14T05:00:00.000Z,
       checkout: 2019-08-14T05:00:00.000Z
       }
 
-PUT path '/checkout'
+PUT path '/checkout/:id'
 
-  - Alters one record, must pass an on object like the one in the POST path along with an id as the third prop:
+  - Alters one record, must pass an on object like the one in the POST path along with an id
       - {
       checkin: 2019-08-14T05:00:00.000Z,
       checkout: 2019-08-14T05:00:00.000Z,
-      id: Number
+      id: 1
       }
 
-DELETE path '/checkout'
+DELETE path '/checkout/:id'
 
   - Deletes one record, must pass an id
 
