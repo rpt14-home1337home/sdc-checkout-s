@@ -28,9 +28,9 @@ const getDates= q => {
   }
   return [checkinDate, checkoutDate];
 }
-const makeData = () => {
+const makeData = (num) => {
   var data = [];
-  for (var i = 1; i < 100; i++) {
+  for (var i = 1; i < num; i++) {
     for (var q = 1; q < 4; q++) {
       var dates = getDates(q);
       data.push(makeObj(i, dates[0], dates[1]));
@@ -39,7 +39,7 @@ const makeData = () => {
   return data;
 }
 
-var data = makeData();
+var data = makeData(10000000);
 var headers = ["propId", "checkin", "checkout"];
 const writeData = (headers, data, output) => {
   var writer = csvWriter({ headers })
