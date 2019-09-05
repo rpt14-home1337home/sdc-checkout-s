@@ -8,6 +8,7 @@ const db = require('./databases/db_pg/controllers/index.js');
 const app = express();
 const port = process.env.PORT || 3002;
 const cors = require('cors');
+require('newrelic');
 
 
 
@@ -36,7 +37,7 @@ app.get('/checkout/prop/:id', (req, res) => {
   id = path.basename(req.url)
   db.getRecordsByProp(id, (err, results) => {
     if (err) {
-      throw new Error(err)
+      res.status(500).send();
     } else {
       res.send(results);
     }
