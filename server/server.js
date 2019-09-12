@@ -19,8 +19,17 @@ if (cluster.isMaster) {
   const app = express();
   const port = process.env.PORT || 3002;
   const cors = require('cors');
+  const fetch = require("node-fetch");
+  var redis = require('redis');
+  var client = redis.createClient();
 
+  client.on('connect', function() {
+    console.log('connected');
+});
 
+client.on('error', (err) => {
+  console.log('Error ' + err);
+})
 
   // Allow CORS
   app.use(cors());
@@ -39,13 +48,25 @@ if (cluster.isMaster) {
 
   // Get by property ID
   app.get('/checkout/prop/:id', (req, res) => {
-    db.getRecordsByProp(path.basename(req.url), (err, results) => {
-      if (err) {
-        res.status(500).send();
+    const id = path.basename(req.url)
+    const propRedisKey = `${id}:prop`;
+
+    return client.get(propRedisKey, (err, prop) => {
+      if (prop) {
+        return res.json({ source: 'cache', data: JSON.parse(prop) })
       } else {
-        res.send(results);
+        db.getRecordsByProp(id, (err, response) => {
+          if (err) {
+            console.log(err);
+            return res.status(500).send()
+          } else {
+            client.setex(propRedisKey, 3600, JSON.stringify(response))
+            return res.status(200).json({ source: 'api', data: response })
+          }
+        })
       }
-    });
+    })
+
   });
 
   // Checkout user

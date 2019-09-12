@@ -9,3 +9,5 @@ report.20190815.165123.45059.001.json
 
 newrelic.js
 newrelic_agent.log
+dump.rdb
+dockerfile
