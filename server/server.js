@@ -53,7 +53,7 @@ client.on('error', (err) => {
 
     return client.get(propRedisKey, (err, prop) => {
       if (prop) {
-        return res.json({ source: 'cache', data: JSON.parse(prop) })
+        return res.status(200).send(prop);
       } else {
         db.getRecordsByProp(id, (err, response) => {
           if (err) {
@@ -61,7 +61,7 @@ client.on('error', (err) => {
             return res.status(500).send()
           } else {
             client.setex(propRedisKey, 3600, JSON.stringify(response))
-            return res.status(200).json({ source: 'api', data: response })
+            return res.status(200).send(response);
           }
         })
       }
