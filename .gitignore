@@ -1,4 +1,9 @@
 node_modules
+seedData7.csv
+report.20190815.165123.45059.001.json
+seedData8.csv
+seedData9.csv
+server/access.log
 seedData.csv
 report.20190815.165123.45059.001.json
 
@@ -6,3 +11,6 @@ newrelic.js
 newrelic_agent.log
 server/access.log
 server/databases/seedData8.csv
+dockerfile
+dump.rdb
+request.yml
