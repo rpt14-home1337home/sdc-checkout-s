@@ -53,6 +53,7 @@ client.on('error', (err) => {
 
     return client.get(propRedisKey, (err, prop) => {
       if (prop) {
+        console.log("cache" + prop);
         return res.status(200).send(prop);
       } else {
         db.getRecordsByProp(id, (err, response) => {
@@ -60,6 +61,7 @@ client.on('error', (err) => {
             console.log(err);
             return res.status(500).send()
           } else {
+            console.log("api");
             client.setex(propRedisKey, 3600, JSON.stringify(response))
             return res.status(200).send(response);
           }
@@ -71,8 +73,15 @@ client.on('error', (err) => {
 
   // Checkout user
   app.post('/checkout/book/:id', (req, res) => {
+    //set id in body
     req.body.id = path.basename(req.url);
+
+    //key to set cache
+    var propRedisKey = `${req.body.id}:prop`;
+
     db.insertRecord(req.body, (err, results) => {
+      console.log("inserted results " + JSON.stringify(results));
+      client.setex(propRedisKey, 3600, JSON.stringify(results))
       err ? res.status(500).send(err) : res.status(200).send(results);
     });
   });

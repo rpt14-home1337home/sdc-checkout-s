@@ -1,12 +1,14 @@
 const db = require('../index.js');
 
 let insertRecord = (data, cb) => {
-  data = [data.id, data.checkin, data.checkout];
-  var query = `INSERT INTO checkout(propId, checkin, checkout) VALUES ($1, $2, $3)`;
-  db.any(query, data)
-    .then((res) => {
-      console.log(`Inserted ${data} into table`);
-      cb(null, res);
+  var propData = [data.id, data.checkin, data.checkout];
+  var query = `INSERT INTO checkout(propId, checkin, checkout) VALUES ($1, $2, $3) RETURNING *`;
+  db.any(query, propData)
+    .then(() => {
+      var query = `SELECT * FROM checkout WHERE propId = ${data.id}`
+      db.any(query)
+      .then(res => cb(null, res))
+      .catch(e => cb(e));
     })
     .catch((e) => {
       console.log(e);
