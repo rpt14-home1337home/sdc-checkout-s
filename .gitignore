@@ -11,3 +11,4 @@ newrelic.js
 newrelic_agent.log
 dump.rdb
 dockerfile
+sdc-postgres

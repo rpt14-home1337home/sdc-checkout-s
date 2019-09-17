@@ -5,9 +5,10 @@
   "main": "server/server.js",
   "scripts": {
     "react-dev": "webpack -d --watch",
-    "start": "nodemon server/server.js",
+    "start": "node server/server.js",
     "seed": "node server/db/seed.js",
-    "test": "jest"
+    "test": "jest",
+    "run": "nodemon -w server/server.js"
   },
   "keywords": [],
   "author": "",

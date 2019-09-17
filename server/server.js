@@ -14,14 +14,12 @@ if (cluster.isMaster) {
   const morgan = require('morgan');
   const bodyParser = require("body-parser");
   const path = require('path');
-  const fs = require('fs');
   const db = require('./databases/db_pg/controllers/index.js');
   const app = express();
   const port = process.env.PORT || 3002;
   const cors = require('cors');
-  const fetch = require("node-fetch");
   var redis = require('redis');
-  var client = redis.createClient();
+  var client = redis.createClient(process.env.REDIS_CLI);
 
   client.on('connect', function() {
     console.log('connected');
@@ -51,9 +49,9 @@ client.on('error', (err) => {
     const id = path.basename(req.url)
     const propRedisKey = `${id}:prop`;
 
+    //redis cache
     return client.get(propRedisKey, (err, prop) => {
       if (prop) {
-        console.log("cache" + prop);
         return res.status(200).send(prop);
       } else {
         db.getRecordsByProp(id, (err, response) => {
@@ -61,7 +59,6 @@ client.on('error', (err) => {
             console.log(err);
             return res.status(500).send()
           } else {
-            console.log("api");
             client.setex(propRedisKey, 3600, JSON.stringify(response))
             return res.status(200).send(response);
           }
@@ -80,7 +77,6 @@ client.on('error', (err) => {
     var propRedisKey = `${req.body.id}:prop`;
 
     db.insertRecord(req.body, (err, results) => {
-      console.log("inserted results " + JSON.stringify(results));
       client.setex(propRedisKey, 3600, JSON.stringify(results))
       err ? res.status(500).send(err) : res.status(200).send(results);
     });
